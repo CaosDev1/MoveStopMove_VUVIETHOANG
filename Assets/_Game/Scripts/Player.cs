@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -13,6 +14,7 @@ public class Player : MonoBehaviour
     [Header("Collier Info")]
     [SerializeField] private LayerMask botLayerMark;
     [SerializeField] private float circleRadius;
+    [SerializeField] private List<Enemy> enemyList;
 
     [Header("Weapon Info")]
     [SerializeField] private Transform holdWeapon;
@@ -26,7 +28,6 @@ public class Player : MonoBehaviour
     private void Update()
     {
         AttackBot();
-        AnimController();
     }
     private void FixedUpdate()
     {
@@ -36,10 +37,12 @@ public class Player : MonoBehaviour
         {
             transform.rotation = Quaternion.LookRotation(rb.velocity);
             isIdle = false;
+            anim.SetBool("IsIdle", isIdle);
         }
         else
         {
             isIdle = true;
+            anim.SetBool("IsIdle", isIdle);
         }
     }
 
@@ -48,14 +51,18 @@ public class Player : MonoBehaviour
         Collider[] bot = Physics.OverlapSphere(transform.position, circleRadius, botLayerMark);
         if(bot.Length != 0 ) 
         {
+            
             if (isIdle)
             {
-                transform.LookAt(bot[bot.Length - 1].transform.position);
+                transform.LookAt(bot[0].transform.position);
                 isAttack= true;
+                anim.SetBool("IsAttack", isAttack);
             }
             else
             {
                 isAttack= false;
+                anim.SetBool("IsAttack", isAttack);
+                
             }
         }
     }
@@ -65,11 +72,9 @@ public class Player : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, circleRadius);
         
     }
-    private void AnimController()
-    {
-        anim.SetBool("IsIdle", isIdle);
-        anim.SetBool("IsAttack", isAttack);
-    }
+
+
+    
     
 
 }
