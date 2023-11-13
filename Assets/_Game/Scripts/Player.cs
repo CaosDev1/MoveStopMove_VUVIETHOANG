@@ -12,13 +12,17 @@ public class Player : MonoBehaviour
     private bool isAttack;
 
     [Header("Collier Info")]
-    [SerializeField] private LayerMask botLayerMark;
+    [SerializeField] private LayerMask enemyLayer;
     [SerializeField] private float circleRadius;
     [SerializeField] private List<Enemy> enemyList;
+    private Transform target;
+    private Transform nearEnemy;
 
     [Header("Weapon Info")]
     [SerializeField] private Transform holdWeapon;
     [SerializeField] private GameObject weapon;
+    [SerializeField] private GameObject bulletPrefab;
+    [SerializeField] private Transform firePos;
 
     private void Start()
     {
@@ -27,7 +31,8 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-        AttackBot();
+        FindCloseEnemy();
+        AttackEnemy();
     }
     private void FixedUpdate()
     {
@@ -43,38 +48,54 @@ public class Player : MonoBehaviour
         {
             isIdle = true;
             anim.SetBool("IsIdle", isIdle);
+
         }
     }
 
-    private void AttackBot()
+    private void AttackEnemy()
     {
-        Collider[] bot = Physics.OverlapSphere(transform.position, circleRadius, botLayerMark);
-        if(bot.Length != 0 ) 
+        if (isIdle && target != null)
         {
-            
-            if (isIdle)
+            transform.LookAt(target.position);
+            GameObject bulletOjb = Instantiate(bulletPrefab,firePos.transform.position,firePos.transform.rotation);
+            Bullet bullets = bulletOjb.GetComponent<Bullet>();
+            bullets.SeekTarget(target);
+
+
+        }
+    }
+
+    private void FindCloseEnemy()
+    {
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, circleRadius, enemyLayer);
+        float miniumDistance = Mathf.Infinity;
+
+        foreach (Collider collider in hitColliders)
+        {
+            float distance = Vector3.Distance(transform.position, collider.transform.position);
+            if (distance < miniumDistance)
             {
-                transform.LookAt(bot[0].transform.position);
-                isAttack= true;
-                anim.SetBool("IsAttack", isAttack);
-            }
-            else
-            {
-                isAttack= false;
-                anim.SetBool("IsAttack", isAttack);
+                miniumDistance = distance;
+                nearEnemy = collider.transform;
                 
             }
         }
+
+        if (nearEnemy != null)
+        {
+            target = nearEnemy;
+            Debug.DrawLine(transform.position, target.position, Color.red);
+        }
+        else
+        {
+            target = null;
+        }
     }
+
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, circleRadius);
-        
     }
-
-
-    
-    
 
 }
