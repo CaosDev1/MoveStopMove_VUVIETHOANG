@@ -10,6 +10,8 @@ public class Character : MonoBehaviour
     public float moveSpeed;
     public bool isIdle;
     public bool isAttack = false;
+    public bool isDead = false;
+    
 
     [Header("Collier Info")]
     public LayerMask enemyLayer;
@@ -25,21 +27,26 @@ public class Character : MonoBehaviour
     public GameObject bulletPrefab;
     public Transform firePos;
 
-    public void Start()
+    public virtual void Start()
     {
         Instantiate(weapon, holdWeapon);
     }
 
-    public void Update()
+    public virtual void Update()
     {
+        if (isDead)
+        {
+            return;
+        }
+        
         FindCloseEnemy();
 
         if (isIdle && !isAttack && nearEnemy != null)
         {
             isAttack = true;
             AttackEnemy();
-            anim.SetBool("IsAttack", true);
-            Invoke(nameof(ResetAttack), 2f);
+            anim.SetBool(ConstString.IS_ATTACK_STRING, true);
+            Invoke(nameof(ResetAttack), 1f);
         }
     }
 
@@ -49,12 +56,24 @@ public class Character : MonoBehaviour
         GameObject spawnBullet = Instantiate(bulletPrefab, firePos.position, firePos.rotation);
         Bullet bulletOjb = spawnBullet.GetComponent<Bullet>();
         bulletOjb.SeekDirec(direc);
+        holdWeapon.gameObject.SetActive(false);
+        
     }
 
     public void ResetAttack()
     {
         isAttack = false;
-        anim.SetBool("IsAttack", false);
+        holdWeapon.gameObject.SetActive(true);
+        anim.SetBool(ConstString.IS_ATTACK_STRING, false);
+    }
+
+    public void IsDead()
+    {
+        isDead = true;
+        isIdle = false;
+        anim.SetBool(ConstString.IS_DEAD_STRING,true);
+        int defaultLayer = LayerMask.NameToLayer("Default");
+        gameObject.layer = defaultLayer;
     }
 
     public void FindCloseEnemy()
@@ -66,7 +85,7 @@ public class Character : MonoBehaviour
         {
             foreach (Collider collider in hitColliders)
             {
-                if(collider.gameObject != this.gameObject)
+                if (collider.gameObject != this.gameObject)
                 {
                     float distance = Vector3.Distance(transform.position, collider.transform.position);
                     if (distance < miniumDistance)
@@ -83,6 +102,11 @@ public class Character : MonoBehaviour
                 transform.LookAt(nearEnemy);
             }
         }
+        else
+        {
+            nearEnemy = null;
+        }
+        
 
     }
 

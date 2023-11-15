@@ -19,11 +19,11 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.CompareTag("Enemy") || other.CompareTag("Player"))
+        if(other.CompareTag(ConstString.ENEMY_TAG) || other.CompareTag(ConstString.PLAYER_TAG))
         {
+            Character character = other.GetComponent<Character>();
+            character.IsDead();
             
-            Destroy(other.gameObject);
-            Destroy(gameObject);
         }
     }
 
