@@ -11,13 +11,9 @@ public class Character : MonoBehaviour
     public bool isAttack = false;
     public bool isDead = false;
 
-
     [Header("Collier Info")]
     public LayerMask enemyLayer;
     public float circleRadius;
-    public Collider[] hitColliders;
-
-
     public Transform nearEnemy;
     public Vector3 direc;
 
@@ -52,9 +48,9 @@ public class Character : MonoBehaviour
         if (isIdle && !isAttack && nearEnemy != null)
         {
             isAttack = true;
-            SpawnBullet();
             anim.SetBool(ConstString.IS_ATTACK_STRING, true);
-            Invoke(nameof(ResetAttack), 1f);
+            SpawnBullet();
+            Invoke(nameof(ResetAttack), 2f);
         }
     }
 
@@ -80,6 +76,7 @@ public class Character : MonoBehaviour
         if (bulletOjb != null)
         {
             distancePlayerVsBullet = Vector3.Distance(transform.position, bulletOjb.transform.position);
+            Debug.Log(distancePlayerVsBullet);
         }
     }
 
@@ -89,21 +86,25 @@ public class Character : MonoBehaviour
         isIdle = false;
 
         anim.SetBool(ConstString.IS_DEAD_STRING, true);
-        int defaultLayer = LayerMask.NameToLayer("Default");
+        int defaultLayer = LayerMask.NameToLayer(ConstString.DEFAULT_LAYER);
         gameObject.layer = defaultLayer;
+        Invoke(nameof(OnDespawn), 2f);
+    }
+
+    public void OnDespawn()
+    {
+        Destroy(gameObject);
     }
 
     public void FindCloseEnemy()
     {
-        hitColliders = Physics.OverlapSphere(transform.position, circleRadius,enemyLayer);
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, circleRadius, enemyLayer);
         float miniumDistance = Mathf.Infinity;
-        
-        if (hitColliders.Length != 0)
-        {
 
+        if (hitColliders.Length > 1)
+        {
             foreach (Collider collider in hitColliders)
             {
-
                 if (collider.gameObject != this.gameObject)
                 {
                     float distance = Vector3.Distance(transform.position, collider.transform.position);
@@ -113,7 +114,6 @@ public class Character : MonoBehaviour
                         nearEnemy = collider.transform;
                     }
                 }
-
             }
             //Facing enemy if player found them
             if (isIdle)

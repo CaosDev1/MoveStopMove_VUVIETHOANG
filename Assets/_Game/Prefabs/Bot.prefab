@@ -151,7 +151,7 @@ MonoBehaviour:
   bulletPrefab: {fileID: 3919491625443160399, guid: 07bc33ddfff4738469e20a63f49e4c0f, type: 3}
   firePos: {fileID: 703433227592459280}
   agent: {fileID: 6920504008158712734}
-  wanderRadius: 5
+  wanderRadius: 10
   newPos: {x: 0, y: 0, z: 0}
 --- !u!1001 &703433227494941053
 PrefabInstance:
