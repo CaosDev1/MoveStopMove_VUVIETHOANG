@@ -474,7 +474,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   circleRadius: 6
-  enemyList: []
+  hitColliders: []
   nearEnemy: {fileID: 0}
   direc: {x: 0, y: 0, z: 0}
   holdWeapon: {fileID: 1472494339}
@@ -571,7 +571,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 703433227947346880, guid: b46553742c538c1409fe66c924c9e729, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.3
+      value: -13.32
       objectReference: {fileID: 0}
     - target: {fileID: 703433227947346880, guid: b46553742c538c1409fe66c924c9e729, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1320,7 +1320,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 703433227947346880, guid: b46553742c538c1409fe66c924c9e729, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 4.12
+      value: 8.45
       objectReference: {fileID: 0}
     - target: {fileID: 703433227947346880, guid: b46553742c538c1409fe66c924c9e729, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1328,7 +1328,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 703433227947346880, guid: b46553742c538c1409fe66c924c9e729, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 10.906
+      value: 1.45
       objectReference: {fileID: 0}
     - target: {fileID: 703433227947346880, guid: b46553742c538c1409fe66c924c9e729, type: 3}
       propertyPath: m_LocalRotation.w

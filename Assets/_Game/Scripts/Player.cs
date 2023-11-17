@@ -23,6 +23,6 @@ public class Player : Character
             isIdle = true;
             anim.SetBool(ConstString.IS_IDLE_STRING, isIdle);
         }
-
+        
     }
 }

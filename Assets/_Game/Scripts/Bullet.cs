@@ -2,9 +2,10 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    //public Transform target;
     [SerializeField] private float speed;
     [SerializeField] private Rigidbody rb;
+    [SerializeField] private float rangeDestroy;
+    private float distance;
     private Vector3 direction;
 
     private void Update()
@@ -17,15 +18,21 @@ public class Bullet : MonoBehaviour
         this.direction = direction;
     }
 
+    public void SeekDistance(float newDistance)
+    {
+        this.distance = newDistance;
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if(other.CompareTag(ConstString.ENEMY_TAG) || other.CompareTag(ConstString.PLAYER_TAG))
         {
             Character character = other.GetComponent<Character>();
             character.IsDead();
-            
+            Destroy(gameObject);
+        }else if(distance > rangeDestroy)
+        {
+            Destroy(gameObject);
         }
     }
-
-
 }
