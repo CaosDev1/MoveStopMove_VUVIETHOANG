@@ -17,6 +17,7 @@ public class Enemy : Character
     }
     public override void Update()
     {
+        base.Update();
         if (currentState != null && !isDead)
         {
             currentState.OnExecute(this);

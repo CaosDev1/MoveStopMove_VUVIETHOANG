@@ -95,14 +95,15 @@ public class Character : MonoBehaviour
 
     public void FindCloseEnemy()
     {
-        hitColliders = Physics.OverlapSphere(transform.position, circleRadius, enemyLayer);
+        hitColliders = Physics.OverlapSphere(transform.position, circleRadius,enemyLayer);
         float miniumDistance = Mathf.Infinity;
-
+        
         if (hitColliders.Length != 0)
         {
 
             foreach (Collider collider in hitColliders)
             {
+
                 if (collider.gameObject != this.gameObject)
                 {
                     float distance = Vector3.Distance(transform.position, collider.transform.position);
