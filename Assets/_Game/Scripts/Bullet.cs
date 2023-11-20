@@ -1,6 +1,6 @@
 using UnityEditor;
 using UnityEngine;
-using UnityEngine.Pool;
+using Lean.Pool;
 
 public class Bullet : MonoBehaviour
 {
@@ -14,8 +14,6 @@ public class Bullet : MonoBehaviour
     private void Update()
     {
         rb.velocity = direction.normalized * speed;
-
-        Invoke(nameof(OnDespawn), timeDestroy);
     }
 
     public void SeekDirec(Vector3 direction)
@@ -25,7 +23,7 @@ public class Bullet : MonoBehaviour
 
     public void OnDespawn()
     {
-        Destroy(gameObject);
+        LeanPool.Despawn(gameObject);
     }
 
     private void OnTriggerEnter(Collider other)

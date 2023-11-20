@@ -1,5 +1,5 @@
 using UnityEngine;
-
+using Lean.Pool;
 public class Character : MonoBehaviour
 {
     [Header("Move Info")]
@@ -58,7 +58,8 @@ public class Character : MonoBehaviour
     public void SpawnBullet()
     {
         direc = nearEnemy.position - transform.position;
-        GameObject spawnBullet = Instantiate(bulletPrefab, firePos.position, firePos.rotation);
+        GameObject spawnBullet = LeanPool.Spawn(bulletPrefab, firePos.position, firePos.rotation);
+        Debug.Log(spawnBullet.name);
         bulletOjb = spawnBullet.GetComponent<Bullet>();
         bulletOjb.SeekDirec(direc);
         holdWeapon.gameObject.SetActive(false);
@@ -75,7 +76,6 @@ public class Character : MonoBehaviour
     {
         isDead = true;
         isIdle = false;
-
         Anim.SetBool(ConstString.IS_DEAD_STRING, true);
         int defaultLayer = LayerMask.NameToLayer(ConstString.DEFAULT_LAYER);
         gameObject.layer = defaultLayer;

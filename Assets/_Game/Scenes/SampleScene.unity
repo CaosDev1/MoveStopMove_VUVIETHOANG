@@ -396,7 +396,7 @@ GameObject:
   - component: {fileID: 236834877}
   - component: {fileID: 236834882}
   - component: {fileID: 236834883}
-  m_Layer: 7
+  m_Layer: 6
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -807,6 +807,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Bot (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 703433227947346885, guid: b46553742c538c1409fe66c924c9e729, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b46553742c538c1409fe66c924c9e729, type: 3}
 --- !u!1001 &702975687
@@ -863,6 +867,10 @@ PrefabInstance:
     - target: {fileID: 703433227947346885, guid: b46553742c538c1409fe66c924c9e729, type: 3}
       propertyPath: m_Name
       value: Bot (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 703433227947346885, guid: b46553742c538c1409fe66c924c9e729, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b46553742c538c1409fe66c924c9e729, type: 3}
@@ -1147,6 +1155,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Bot (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 703433227947346885, guid: b46553742c538c1409fe66c924c9e729, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b46553742c538c1409fe66c924c9e729, type: 3}
 --- !u!1 &963194225
@@ -1318,8 +1330,69 @@ PrefabInstance:
       propertyPath: m_Name
       value: Bot (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 703433227947346885, guid: b46553742c538c1409fe66c924c9e729, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b46553742c538c1409fe66c924c9e729, type: 3}
+--- !u!1 &1649299592
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1649299594}
+  - component: {fileID: 1649299593}
+  m_Layer: 0
+  m_Name: BulletPool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1649299593
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1649299592}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eea08375da243a441b88d1e6b0713006, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 3919491625443160399, guid: 07bc33ddfff4738469e20a63f49e4c0f, type: 3}
+  notification: 3
+  strategy: 0
+  preload: 0
+  capacity: 0
+  recycle: 0
+  persist: 0
+  stamp: 0
+  warnings: 1
+  spawnedClonesList: []
+  despawnedClones: []
+  delays: []
+  deactivatedChild: {fileID: 0}
+--- !u!4 &1649299594
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1649299592}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 12
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1682942861
 GameObject:
   m_ObjectHideFlags: 0
@@ -1670,6 +1743,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Bot (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 703433227947346885, guid: b46553742c538c1409fe66c924c9e729, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b46553742c538c1409fe66c924c9e729, type: 3}
 --- !u!1 &1999130107
@@ -1819,6 +1896,10 @@ PrefabInstance:
     - target: {fileID: 703433227947346880, guid: b46553742c538c1409fe66c924c9e729, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 703433227947346881, guid: b46553742c538c1409fe66c924c9e729, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 703433227947346885, guid: b46553742c538c1409fe66c924c9e729, type: 3}
       propertyPath: m_Name
