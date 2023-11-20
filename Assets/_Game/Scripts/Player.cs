@@ -14,14 +14,13 @@ public class Player : Character
         {
             transform.rotation = Quaternion.LookRotation(rb.velocity);
             isIdle = false;
-            isAttack = false;
-            anim.SetBool(ConstString.IS_IDLE_STRING, isIdle);
-            anim.SetBool(ConstString.IS_ATTACK_STRING, false);
+            Anim.SetBool(ConstString.IS_IDLE_STRING, isIdle);
+            Anim.SetBool(ConstString.IS_ATTACK_STRING, false);
         }
         else
         {
             isIdle = true;
-            anim.SetBool(ConstString.IS_IDLE_STRING, isIdle);
+            Anim.SetBool(ConstString.IS_IDLE_STRING, isIdle);
         }
         
     }

@@ -3,27 +3,30 @@ using UnityEngine;
 public class Character : MonoBehaviour
 {
     [Header("Move Info")]
-    public Rigidbody rb;
-    public DynamicJoystick joystick;
-    public Animator anim;
-    public float moveSpeed;
+    [SerializeField] protected Rigidbody rb;
+    [SerializeField] protected DynamicJoystick joystick;
+    [SerializeField] private Animator anim;
+    [SerializeField] protected float moveSpeed;
     public bool isIdle;
     public bool isAttack = false;
     public bool isDead = false;
 
     [Header("Collier Info")]
-    public LayerMask enemyLayer;
-    public float circleRadius;
-    public Transform nearEnemy;
-    public Vector3 direc;
+    [SerializeField] protected LayerMask enemyLayer;
+    [SerializeField] protected float circleRadius;
+    protected Transform nearEnemy;
+    protected Vector3 direc;
 
     [Header("Weapon Info")]
-    public Transform holdWeapon;
-    public GameObject weapon;
-    public GameObject bulletPrefab;
-    public Transform firePos;
-    private Bullet bulletOjb;
-    private float distancePlayerVsBullet;
+    [SerializeField] protected Transform holdWeapon;
+    [SerializeField] protected GameObject weapon;
+    [SerializeField] protected GameObject bulletPrefab;
+    [SerializeField] protected Transform firePos;
+    protected Bullet bulletOjb;
+    protected float distancePlayerVsBullet;
+
+    public Animator Anim { get => anim; set => anim = value; }
+
     public virtual void Start()
     {
         Instantiate(weapon, holdWeapon);
@@ -37,21 +40,19 @@ public class Character : MonoBehaviour
         }
 
         FindCloseEnemy();
-
-        Attack();
-
-        DistancePlayerAndBullet();
+        if (isIdle && !isAttack && nearEnemy != null)
+        {
+            Attack();
+        }
+        
     }
 
     public void Attack()
     {
-        if (isIdle && !isAttack && nearEnemy != null)
-        {
-            isAttack = true;
-            anim.SetBool(ConstString.IS_ATTACK_STRING, true);
-            SpawnBullet();
-            Invoke(nameof(ResetAttack), 2f);
-        }
+        isAttack = true;
+        Anim.SetBool(ConstString.IS_ATTACK_STRING, true);
+        SpawnBullet();
+        Invoke(nameof(ResetAttack), 2f);
     }
 
     public void SpawnBullet()
@@ -60,7 +61,6 @@ public class Character : MonoBehaviour
         GameObject spawnBullet = Instantiate(bulletPrefab, firePos.position, firePos.rotation);
         bulletOjb = spawnBullet.GetComponent<Bullet>();
         bulletOjb.SeekDirec(direc);
-        bulletOjb.SeekDistance(distancePlayerVsBullet);
         holdWeapon.gameObject.SetActive(false);
     }
 
@@ -68,16 +68,7 @@ public class Character : MonoBehaviour
     {
         isAttack = false;
         holdWeapon.gameObject.SetActive(true);
-        anim.SetBool(ConstString.IS_ATTACK_STRING, false);
-    }
-
-    public void DistancePlayerAndBullet()
-    {
-        if (bulletOjb != null)
-        {
-            distancePlayerVsBullet = Vector3.Distance(transform.position, bulletOjb.transform.position);
-            Debug.Log(distancePlayerVsBullet);
-        }
+        Anim.SetBool(ConstString.IS_ATTACK_STRING, false);
     }
 
     public void IsDead()
@@ -85,7 +76,7 @@ public class Character : MonoBehaviour
         isDead = true;
         isIdle = false;
 
-        anim.SetBool(ConstString.IS_DEAD_STRING, true);
+        Anim.SetBool(ConstString.IS_DEAD_STRING, true);
         int defaultLayer = LayerMask.NameToLayer(ConstString.DEFAULT_LAYER);
         gameObject.layer = defaultLayer;
         Invoke(nameof(OnDespawn), 2f);

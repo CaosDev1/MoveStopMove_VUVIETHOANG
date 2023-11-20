@@ -28,12 +28,12 @@ public class PatrolState : IState
         if (!enemy.isTarget)
         {
             enemy.isIdle = false;
-            enemy.anim.SetBool(ConstString.IS_IDLE_STRING, false);
+            enemy.Anim.SetBool(ConstString.IS_IDLE_STRING, false);
         }
         else
         {
             enemy.isIdle = true;
-            enemy.anim.SetBool(ConstString.IS_IDLE_STRING, true);
+            enemy.Anim.SetBool(ConstString.IS_IDLE_STRING, true);
         }
     }
 

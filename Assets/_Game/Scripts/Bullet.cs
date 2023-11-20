@@ -1,17 +1,21 @@
+using UnityEditor;
 using UnityEngine;
+using UnityEngine.Pool;
 
 public class Bullet : MonoBehaviour
 {
     [SerializeField] private float speed;
     [SerializeField] private Rigidbody rb;
     [SerializeField] private float rangeDestroy;
-    private float distance;
+    [SerializeField] private float timeDestroy;
+    private Vector3 enemyPos;
     private Vector3 direction;
     
-
     private void Update()
     {
         rb.velocity = direction.normalized * speed;
+
+        Invoke(nameof(OnDespawn), timeDestroy);
     }
 
     public void SeekDirec(Vector3 direction)
@@ -19,10 +23,9 @@ public class Bullet : MonoBehaviour
         this.direction = direction;
     }
 
-    public void SeekDistance(float newDistance)
+    public void OnDespawn()
     {
-        this.distance = newDistance;
-
+        Destroy(gameObject);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -31,7 +34,7 @@ public class Bullet : MonoBehaviour
         {
             Character character = other.GetComponent<Character>();
             character.IsDead();
-            Destroy(gameObject);
+            OnDespawn();
         }
     }
 }
