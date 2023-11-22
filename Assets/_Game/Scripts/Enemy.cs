@@ -1,3 +1,4 @@
+using Lean.Pool;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -22,6 +23,17 @@ public class Enemy : Character
         {
             currentState.OnExecute(this);
         }
+    }
+
+    public override void OnDeath()
+    {
+        base.OnDeath();
+        SpawnManager.Instance.EnemyDeath(this);
+    }
+
+    public override void OnDespawn()
+    {
+        LeanPool.Despawn(this);
     }
 
     public void SetDirection()

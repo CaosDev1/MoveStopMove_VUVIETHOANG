@@ -6,8 +6,6 @@ public class Bullet : MonoBehaviour
 {
     [SerializeField] private float speed;
     [SerializeField] private Rigidbody rb;
-    [SerializeField] private float rangeDestroy;
-    [SerializeField] private float timeDestroy;
     private Vector3 direction;
     
     private void Update()
@@ -30,7 +28,7 @@ public class Bullet : MonoBehaviour
         if (other.CompareTag(ConstString.ENEMY_TAG) || other.CompareTag(ConstString.PLAYER_TAG))
         {
             Character character = other.GetComponent<Character>();
-            character.IsDead();
+            character.OnDeath();
             LeanPool.Despawn(gameObject);
         }
     }

@@ -10,4 +10,5 @@ public class ConstString : MonoBehaviour
     public const string IS_IDLE_STRING = "IsIdle";
     public const string IS_DEAD_STRING = "IsDead";
     public const string DEFAULT_LAYER = "Default";
+    public const string CHARACTER_LAYER = "Character";
 }

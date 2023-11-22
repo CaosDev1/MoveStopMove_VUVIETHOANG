@@ -18,13 +18,15 @@ public class Character : MonoBehaviour
     protected Vector3 direc;
 
     [Header("Weapon Info")]
+    [SerializeField] protected WeaponType currentWeaponType;
     [SerializeField] protected Transform holdWeapon;
     [SerializeField] protected GameObject weapon;
     [SerializeField] protected GameObject bulletPrefab;
     [SerializeField] protected Transform firePos;
     [SerializeField] protected float timeDestroy;
+    private Weapon characterWeapon;
+
     protected Bullet bulletOjb;
-    
 
     public Animator Anim { get => anim; set => anim = value; }
 
@@ -45,6 +47,11 @@ public class Character : MonoBehaviour
         {
             Attack();
         }
+    }
+
+    private void SpawnWeapon()
+    {
+        
     }
 
     public void Attack()
@@ -73,9 +80,16 @@ public class Character : MonoBehaviour
         Anim.SetBool(ConstString.IS_ATTACK_STRING, false);
     }
 
+    public void OnInit()
+    {
+        isDead = false;
+        isIdle = true;
+        Anim.SetBool(ConstString.IS_IDLE_STRING, true);
+        int characterLayer = LayerMask.NameToLayer(ConstString.CHARACTER_LAYER);
+        gameObject.layer = characterLayer;
+    }
 
-
-    public void IsDead()
+    public virtual void OnDeath()
     {
         isDead = true;
         isIdle = false;
@@ -85,16 +99,16 @@ public class Character : MonoBehaviour
         Invoke(nameof(OnDespawn), 2f);
     }
 
-    public void OnDespawn()
+    public virtual void OnDespawn()
     {
-        Destroy(gameObject);
+        
     }
 
     public void FindCloseEnemy()
     {
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, circleRadius, enemyLayer);
         float miniumDistance = Mathf.Infinity;
-
+        
         if (hitColliders.Length > 1)
         {
             foreach (Collider collider in hitColliders)

@@ -22,4 +22,11 @@ public class Player : Character
         }
 
     }
+
+    public override void OnDeath()
+    {
+        base.OnDeath();
+        //TO DO: Pop up UI when player die
+        
+    }
 }

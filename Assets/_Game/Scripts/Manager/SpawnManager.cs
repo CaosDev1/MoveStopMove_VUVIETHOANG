@@ -1,0 +1,67 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using Lean.Pool;
+using UnityEngine.AI;
+
+public class SpawnManager : Singleton<SpawnManager>
+{
+    [SerializeField] private Enemy enemyPrefab;
+    [SerializeField] private float minTimespawn, maxTimespawn;
+    [SerializeField] private int maxEnemySpawn;
+    [SerializeField] protected List<Transform> spawnPos = new List<Transform>();
+
+    private List<Enemy> enemies = new List<Enemy>();
+
+    private void Start()
+    {
+        StartSpawnEnemy(maxEnemySpawn);
+    }
+
+    private void StartSpawnEnemy(int maxEnemy)
+    {
+        for (int i = 0; i < maxEnemy; i++)
+        {
+
+            //Enemy spawnEnemy = LeanPool.Spawn(enemyPrefab, new Vector3(randomX, 0f, randomZ), Quaternion.identity);
+            Enemy spawnEnemy = LeanPool.Spawn(enemyPrefab, RandomNavSphere(Vector3.zero, 50f, -1), Quaternion.identity);
+            enemies.Add(spawnEnemy);
+        }
+    }
+
+    public void EnemyDeath(Enemy enemy)
+    {
+        enemies.Remove(enemy);
+        //TO DO: Check logic spawn enemy
+        if(enemies.Count < maxEnemySpawn)
+        {
+            StartCoroutine(AddEnemy(Random.Range(minTimespawn,maxTimespawn)));
+        }
+    }
+
+    public IEnumerator AddEnemy(float time)
+    {
+        yield return new WaitForSeconds(time);
+        
+        //Enemy spawnEnemy = LeanPool.Spawn(enemyPrefab, new Vector3(randomX, 0f, randomZ), Quaternion.identity);
+        Enemy spawnEnemy = LeanPool.Spawn(enemyPrefab, RandomNavSphere(Vector3.zero,50f,-1), Quaternion.identity);
+        spawnEnemy.OnInit();
+        enemies.Add(spawnEnemy);
+        
+    }
+
+    public Vector3 RandomNavSphere(Vector3 origin, float dist, int layermask)
+    {
+        Vector3 randDirection = Random.insideUnitSphere * dist;
+
+        randDirection += origin;
+
+        NavMeshHit navHit;
+
+        NavMesh.SamplePosition(randDirection, out navHit, dist, layermask);
+
+        return navHit.position;
+    }
+
+
+}
