@@ -8,7 +8,6 @@ public class Bullet : MonoBehaviour
     [SerializeField] private Rigidbody rb;
     [SerializeField] private float rangeDestroy;
     [SerializeField] private float timeDestroy;
-    private Vector3 enemyPos;
     private Vector3 direction;
     
     private void Update()
@@ -21,9 +20,9 @@ public class Bullet : MonoBehaviour
         this.direction = direction;
     }
 
-    public void OnDespawn()
+    public void OnDespawn(float timeDespawn)
     {
-        LeanPool.Despawn(gameObject);
+        LeanPool.Despawn(gameObject, timeDespawn);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -32,7 +31,7 @@ public class Bullet : MonoBehaviour
         {
             Character character = other.GetComponent<Character>();
             character.IsDead();
-            OnDespawn();
+            LeanPool.Despawn(gameObject);
         }
     }
 }

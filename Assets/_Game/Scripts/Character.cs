@@ -1,5 +1,5 @@
-using UnityEngine;
 using Lean.Pool;
+using UnityEngine;
 public class Character : MonoBehaviour
 {
     [Header("Move Info")]
@@ -22,8 +22,9 @@ public class Character : MonoBehaviour
     [SerializeField] protected GameObject weapon;
     [SerializeField] protected GameObject bulletPrefab;
     [SerializeField] protected Transform firePos;
+    [SerializeField] protected float timeDestroy;
     protected Bullet bulletOjb;
-    protected float distancePlayerVsBullet;
+    
 
     public Animator Anim { get => anim; set => anim = value; }
 
@@ -44,7 +45,6 @@ public class Character : MonoBehaviour
         {
             Attack();
         }
-        
     }
 
     public void Attack()
@@ -53,13 +53,14 @@ public class Character : MonoBehaviour
         Anim.SetBool(ConstString.IS_ATTACK_STRING, true);
         SpawnBullet();
         Invoke(nameof(ResetAttack), 2f);
+        bulletOjb.OnDespawn(timeDestroy);
     }
 
     public void SpawnBullet()
     {
         direc = nearEnemy.position - transform.position;
         GameObject spawnBullet = LeanPool.Spawn(bulletPrefab, firePos.position, firePos.rotation);
-        Debug.Log(spawnBullet.name);
+
         bulletOjb = spawnBullet.GetComponent<Bullet>();
         bulletOjb.SeekDirec(direc);
         holdWeapon.gameObject.SetActive(false);
@@ -71,6 +72,8 @@ public class Character : MonoBehaviour
         holdWeapon.gameObject.SetActive(true);
         Anim.SetBool(ConstString.IS_ATTACK_STRING, false);
     }
+
+
 
     public void IsDead()
     {
