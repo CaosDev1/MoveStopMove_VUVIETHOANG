@@ -9,7 +9,6 @@ public class LevelManager : Singleton<LevelManager>
     [SerializeField] private Enemy enemyPrefab;
     [SerializeField] private float minTimespawn, maxTimespawn;
     [SerializeField] private int maxEnemySpawn;
-    [SerializeField] protected List<Transform> spawnPos = new List<Transform>();
 
     private List<Enemy> enemies = new List<Enemy>();
 
@@ -44,7 +43,7 @@ public class LevelManager : Singleton<LevelManager>
         yield return new WaitForSeconds(time);
         
         //Enemy spawnEnemy = LeanPool.Spawn(enemyPrefab, new Vector3(randomX, 0f, randomZ), Quaternion.identity);
-        Enemy spawnEnemy = LeanPool.Spawn(enemyPrefab, RandomNavSphere(Vector3.zero,50f,-1), Quaternion.identity);
+        Enemy spawnEnemy = LeanPool.Spawn(enemyPrefab, RandomNavSphere(Vector3.zero,20f,-1), Quaternion.identity);
         spawnEnemy.OnInit();
         enemies.Add(spawnEnemy);
     }

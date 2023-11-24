@@ -1,5 +1,4 @@
 using Lean.Pool;
-using System.Collections.Generic;
 using UnityEngine;
 public class Character : MonoBehaviour
 {
@@ -66,7 +65,7 @@ public class Character : MonoBehaviour
     {
         direc = nearEnemy.position - transform.position;
         Bullet spawnBullet = LeanPool.Spawn(weaponData.bullet, firePos.position, firePos.rotation);
-        
+
         bulletOjb = spawnBullet.GetComponent<Bullet>();
         bulletOjb.SeekDirec(direc);
         holdWeapon.gameObject.SetActive(false);
@@ -100,39 +99,39 @@ public class Character : MonoBehaviour
 
     public virtual void OnDespawn()
     {
-        
+
     }
 
     public void FindCloseEnemy()
     {
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, circleRadius, enemyLayer);
         float miniumDistance = Mathf.Infinity;
-        
-        if (hitColliders.Length > 1)
+
+        foreach (Collider collider in hitColliders)
         {
-            foreach (Collider collider in hitColliders)
+            if (collider.gameObject != this.gameObject)
             {
-                if (collider.gameObject != this.gameObject)
+                float distance = Vector3.Distance(transform.position, collider.transform.position);
+                if (distance <= miniumDistance)
                 {
-                    float distance = Vector3.Distance(transform.position, collider.transform.position);
-                    if (distance < miniumDistance)
-                    {
-                        miniumDistance = distance;
-                        nearEnemy = collider.transform;
-                    }
+                    miniumDistance = distance;
+                    nearEnemy = collider.transform;
                 }
             }
-
-            //Facing enemy if player found them
-            if (isIdle)
+            else
             {
-                transform.LookAt(nearEnemy);
+                nearEnemy = null;
             }
         }
-        else
+
+
+
+        //Facing enemy if player found them
+        if (isIdle)
         {
-            nearEnemy = null;
+            transform.LookAt(nearEnemy);
         }
+
     }
 
     public void OnDrawGizmos()

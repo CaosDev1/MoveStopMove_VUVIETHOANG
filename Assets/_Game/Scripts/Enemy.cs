@@ -1,15 +1,16 @@
 using Lean.Pool;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class Enemy : Character
 {
-    [Header("Navmesh Info")]
     public NavMeshAgent agent;
-    private IState currentState;
     public float wanderRadius = 6f;
-    public Vector3 newPos;
-    
+    [SerializeField] protected GameObject indicator;
+    private IState currentState;
+    private Vector3 newPos;
+
     public bool isTarget => Vector3.Distance(transform.position, newPos) < 0.1f;
 
     public override void Start()
@@ -30,16 +31,28 @@ public class Enemy : Character
     {
         base.OnInit();
         SetWeaponEnemy();
+        ChangeState(new PatrolState());
     }
 
     private void SetWeaponEnemy()
     {
-        int index = Random.Range(0, 5);
+        List<WeaponData> weapons = DataManager.Instance.weaponDataSO.listWeaponData;
+        int index = Random.Range(0, weapons.Count - 1);
         currentWeaponType = (WeaponType)index;
         if (weaponData == null)
         {
             weaponData = DataManager.Instance.GetWeaponData(currentWeaponType);
         }
+    }
+
+    public void TurnOnIndicator()
+    {
+        indicator.SetActive(true);
+    }
+
+    public void TurnOffIndicator()
+    {
+        indicator.SetActive(false);
     }
 
     public override void OnDeath()

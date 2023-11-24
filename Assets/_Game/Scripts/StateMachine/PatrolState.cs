@@ -2,8 +2,8 @@ using System.Numerics;
 using System.Security.Cryptography;
 using System.Threading;
 using Unity.VisualScripting;
-using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine;
 
 public class PatrolState : IState
 {
@@ -17,7 +17,7 @@ public class PatrolState : IState
     public void OnExecute(Enemy enemy)
     {
         timer += Time.deltaTime;
-        
+
         if(timer >= wanderTimer && !enemy.isAttack)
         {
             enemy.SetDirection();
