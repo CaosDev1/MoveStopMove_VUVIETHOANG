@@ -144,9 +144,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 192
   circleRadius: 6
+  currentWeaponType: 3
   holdWeapon: {fileID: 4236809099463843975}
-  weapon: {fileID: 100000, guid: 90389cac50942cb4ca38583e6531094a, type: 3}
-  bulletPrefab: {fileID: 3919491625443160399, guid: 07bc33ddfff4738469e20a63f49e4c0f, type: 3}
   firePos: {fileID: 703433227592459280}
   timeDestroy: 1
   agent: {fileID: 6920504008158712734}

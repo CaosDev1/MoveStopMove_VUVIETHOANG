@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class Player : Character
 {
+    
     private void FixedUpdate()
     {
         if (isDead) return;
@@ -21,6 +22,15 @@ public class Player : Character
             Anim.SetBool(ConstString.IS_IDLE_STRING, isIdle);
         }
 
+    }
+
+    public override void OnInit()
+    {
+        base.OnInit();
+        if (weaponData == null)
+        {
+            weaponData = DataManager.Instance.GetWeaponData(currentWeaponType);
+        }
     }
 
     public override void OnDeath()

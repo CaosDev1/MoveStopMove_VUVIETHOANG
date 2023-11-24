@@ -9,6 +9,7 @@ public class Enemy : Character
     private IState currentState;
     public float wanderRadius = 6f;
     public Vector3 newPos;
+    
     public bool isTarget => Vector3.Distance(transform.position, newPos) < 0.1f;
 
     public override void Start()
@@ -25,10 +26,26 @@ public class Enemy : Character
         }
     }
 
+    public override void OnInit()
+    {
+        base.OnInit();
+        SetWeaponEnemy();
+    }
+
+    private void SetWeaponEnemy()
+    {
+        int index = Random.Range(0, 5);
+        currentWeaponType = (WeaponType)index;
+        if (weaponData == null)
+        {
+            weaponData = DataManager.Instance.GetWeaponData(currentWeaponType);
+        }
+    }
+
     public override void OnDeath()
     {
         base.OnDeath();
-        SpawnManager.Instance.EnemyDeath(this);
+        LevelManager.Instance.EnemyDeath(this);
     }
 
     public override void OnDespawn()
@@ -54,8 +71,6 @@ public class Enemy : Character
 
         return navHit.position;
     }
-
-
 
     public void ChangeState(IState newState)
     {

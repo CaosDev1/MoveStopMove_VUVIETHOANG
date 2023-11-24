@@ -15,7 +15,7 @@ public enum WeaponType
 [Serializable]
 public class WeaponData
 {
-    public WeaponType WeaponType;
+    public WeaponType weaponType;
     public Weapon weapon;
     public Bullet bullet;
 }

@@ -4,7 +4,5 @@ using UnityEngine;
 [CreateAssetMenu]
 public class WeaponDataSO : ScriptableObject
 {
-    public static WeaponDataSO instance;
-    public List<WeaponData> weaponData;
-
+    public List<WeaponData> listWeaponData;
 }

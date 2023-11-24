@@ -1,4 +1,5 @@
 using Lean.Pool;
+using System.Collections.Generic;
 using UnityEngine;
 public class Character : MonoBehaviour
 {
@@ -20,19 +21,17 @@ public class Character : MonoBehaviour
     [Header("Weapon Info")]
     [SerializeField] protected WeaponType currentWeaponType;
     [SerializeField] protected Transform holdWeapon;
-    [SerializeField] protected GameObject weapon;
-    [SerializeField] protected GameObject bulletPrefab;
     [SerializeField] protected Transform firePos;
     [SerializeField] protected float timeDestroy;
-    private Weapon characterWeapon;
-
+    protected WeaponData weaponData;
     protected Bullet bulletOjb;
 
     public Animator Anim { get => anim; set => anim = value; }
 
     public virtual void Start()
     {
-        Instantiate(weapon, holdWeapon);
+        OnInit();
+        SpawnWeapon();
     }
 
     public virtual void Update()
@@ -51,7 +50,7 @@ public class Character : MonoBehaviour
 
     private void SpawnWeapon()
     {
-        
+        Instantiate(weaponData.weapon, holdWeapon);
     }
 
     public void Attack()
@@ -66,8 +65,8 @@ public class Character : MonoBehaviour
     public void SpawnBullet()
     {
         direc = nearEnemy.position - transform.position;
-        GameObject spawnBullet = LeanPool.Spawn(bulletPrefab, firePos.position, firePos.rotation);
-
+        Bullet spawnBullet = LeanPool.Spawn(weaponData.bullet, firePos.position, firePos.rotation);
+        
         bulletOjb = spawnBullet.GetComponent<Bullet>();
         bulletOjb.SeekDirec(direc);
         holdWeapon.gameObject.SetActive(false);
@@ -80,7 +79,7 @@ public class Character : MonoBehaviour
         Anim.SetBool(ConstString.IS_ATTACK_STRING, false);
     }
 
-    public void OnInit()
+    public virtual void OnInit()
     {
         isDead = false;
         isIdle = true;
@@ -123,6 +122,7 @@ public class Character : MonoBehaviour
                     }
                 }
             }
+
             //Facing enemy if player found them
             if (isIdle)
             {

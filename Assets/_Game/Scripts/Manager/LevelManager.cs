@@ -4,7 +4,7 @@ using UnityEngine;
 using Lean.Pool;
 using UnityEngine.AI;
 
-public class SpawnManager : Singleton<SpawnManager>
+public class LevelManager : Singleton<LevelManager>
 {
     [SerializeField] private Enemy enemyPrefab;
     [SerializeField] private float minTimespawn, maxTimespawn;
@@ -47,7 +47,6 @@ public class SpawnManager : Singleton<SpawnManager>
         Enemy spawnEnemy = LeanPool.Spawn(enemyPrefab, RandomNavSphere(Vector3.zero,50f,-1), Quaternion.identity);
         spawnEnemy.OnInit();
         enemies.Add(spawnEnemy);
-        
     }
 
     public Vector3 RandomNavSphere(Vector3 origin, float dist, int layermask)
