@@ -57,7 +57,7 @@ public class Character : MonoBehaviour
         isAttack = true;
         Anim.SetBool(ConstString.IS_ATTACK_STRING, true);
         SpawnBullet();
-        Invoke(nameof(ResetAttack), 2f);
+        Invoke(nameof(ResetAttack), 1f);
         bulletOjb.OnDespawn(timeDestroy);
     }
 
@@ -106,25 +106,30 @@ public class Character : MonoBehaviour
     {
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, circleRadius, enemyLayer);
         float miniumDistance = Mathf.Infinity;
-
-        foreach (Collider collider in hitColliders)
+        Debug.Log(hitColliders.Length);
+        if(hitColliders.Length > 1)
         {
-            if (collider.gameObject != this.gameObject)
+            foreach (Collider collider in hitColliders)
             {
-                float distance = Vector3.Distance(transform.position, collider.transform.position);
-                if (distance <= miniumDistance)
+                if (collider.gameObject != this.gameObject)
                 {
-                    miniumDistance = distance;
-                    nearEnemy = collider.transform;
+                    float distance = Vector3.Distance(transform.position, collider.transform.position);
+                    if (distance <= miniumDistance)
+                    {
+                        miniumDistance = distance;
+                        nearEnemy = collider.transform;
+                    }
+                }
+                else
+                {
+                    nearEnemy = null;
                 }
             }
-            else
-            {
-                nearEnemy = null;
-            }
         }
-
-
+        else
+        {
+            nearEnemy = null;
+        }
 
         //Facing enemy if player found them
         if (isIdle)

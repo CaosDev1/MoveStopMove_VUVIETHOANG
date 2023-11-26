@@ -473,7 +473,7 @@ MonoBehaviour:
   enemyLayer:
     serializedVersion: 2
     m_Bits: 192
-  circleRadius: 6
+  circleRadius: 6.2
   currentWeaponType: 0
   holdWeapon: {fileID: 1472494339}
   firePos: {fileID: 821161197}
