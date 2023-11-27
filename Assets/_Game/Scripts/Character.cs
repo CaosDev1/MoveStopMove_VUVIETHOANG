@@ -33,6 +33,8 @@ public class Character : MonoBehaviour
         SpawnWeapon();
     }
 
+    
+
     public virtual void Update()
     {
         if (isDead)
