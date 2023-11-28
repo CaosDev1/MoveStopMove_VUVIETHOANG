@@ -25,15 +25,15 @@ public class PatrolState : IState
             wanderTimer = Random.Range(3f, 5f);
         }
 
-        if (!enemy.isTarget)
+        if (!enemy.isEndPoint)
         {
             enemy.isIdle = false;
-            enemy.Anim.SetBool(ConstString.IS_IDLE_STRING, false);
+            enemy.ChangeAnim(CacheString.ANIM_RUN);
         }
         else
         {
             enemy.isIdle = true;
-            enemy.Anim.SetBool(ConstString.IS_IDLE_STRING, true);
+            enemy.ChangeAnim(CacheString.ANIM_IDLE);
         }
     }
 

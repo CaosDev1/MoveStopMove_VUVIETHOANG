@@ -7,11 +7,11 @@ public class Enemy : Character
 {
     public NavMeshAgent agent;
     public float wanderRadius = 6f;
-    [SerializeField] protected GameObject indicator;
+    //[SerializeField] protected GameObject indicator;
     private IState currentState;
     private Vector3 newPos;
 
-    public bool isTarget => Vector3.Distance(transform.position, newPos) < 0.1f;
+    public bool isEndPoint => Vector3.Distance(transform.position, newPos) < 0.1f;
 
     public override void Start()
     {
@@ -48,12 +48,12 @@ public class Enemy : Character
 
     public void TurnOnIndicator()
     {
-        indicator.SetActive(true);
+        //indicator.SetActive(true);
     }
 
     public void TurnOffIndicator()
     {
-        indicator.SetActive(false);
+        //indicator.SetActive(false);
     }
 
     public override void OnDeath()

@@ -6,6 +6,7 @@ public class Bullet : MonoBehaviour
 {
     [SerializeField] private float speed;
     [SerializeField] private Rigidbody rb;
+    private Character attacker;
     private Vector3 direction;
     
     private void Update()
@@ -18,6 +19,11 @@ public class Bullet : MonoBehaviour
         this.direction = direction;
     }
 
+    public void SeekAttacker(Character attacker)
+    {
+        this.attacker = attacker;
+    }
+
     public void OnDespawn(float timeDespawn)
     {
         LeanPool.Despawn(gameObject, timeDespawn);
@@ -25,11 +31,15 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag(ConstString.ENEMY_TAG) || other.CompareTag(ConstString.PLAYER_TAG))
+        if (other.CompareTag(CacheString.BOT_TAG) || other.CompareTag(CacheString.PLAYER_TAG))
         {
             Character character = other.GetComponent<Character>();
-            character.OnDeath();
-            LeanPool.Despawn(gameObject);
+            if (attacker != character)
+            {
+                character.OnDeath();
+                LeanPool.Despawn(gameObject);
+            }
+            
         }
     }
 }
