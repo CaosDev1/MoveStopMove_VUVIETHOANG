@@ -64,7 +64,11 @@ public class Character : MonoBehaviour
         Instantiate(weaponData.weapon, holdWeapon);
     }
 
-
+    public void RemoveTargetFormList(Character attacker)
+    {
+        listTarget.Remove(attacker);
+        
+    }
     public void Attack()
     {
         ChangeAnim(CacheString.ANIM_ATTACK);
@@ -84,6 +88,8 @@ public class Character : MonoBehaviour
         holdWeapon.gameObject.SetActive(false);
         yield return new WaitForSeconds(time);
     }
+
+    
 
     public void ResetAttack()
     {
@@ -161,7 +167,6 @@ public class Character : MonoBehaviour
                 //}
             }
         }
-
     }
 
     private void OnTriggerExit(Collider other)
@@ -170,24 +175,24 @@ public class Character : MonoBehaviour
         if (other.gameObject.layer == LayerMask.NameToLayer(CacheString.CHARACTER_LAYER))
         {
             Character targetout = other.GetComponent<Character>();
-            listTarget.Remove(targetout);
+            //listTarget.Remove(targetout);
             //Enemy exit range will be remove form list or main target
-            //if(mainTarget == targetout)
-            //{
-            //    if(listTarget.Count > 0)
-            //    {
-            //        mainTarget = listTarget[0];
-            //        listTarget.RemoveAt(0);
-            //    }
-            //    else
-            //    {
-            //        mainTarget = null;
-            //    }
-            //}
-            //else
-            //{
-            //    listTarget.Remove(targetout);
-            //}
+            if (mainTarget == targetout)
+            {
+                if (listTarget.Count > 0)
+                {
+                    mainTarget = listTarget[0];
+                    listTarget.RemoveAt(0);
+                }
+                else
+                {
+                    mainTarget = null;
+                }
+            }
+            else
+            {
+                listTarget.Remove(targetout);
+            }
         }
     }
 

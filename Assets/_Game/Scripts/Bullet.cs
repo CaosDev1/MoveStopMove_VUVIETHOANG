@@ -22,6 +22,7 @@ public class Bullet : MonoBehaviour
     public void SeekAttacker(Character attacker)
     {
         this.attacker = attacker;
+
     }
 
     public void OnDespawn(float timeDespawn)
@@ -34,9 +35,11 @@ public class Bullet : MonoBehaviour
         if (other.CompareTag(CacheString.BOT_TAG) || other.CompareTag(CacheString.PLAYER_TAG))
         {
             Character character = other.GetComponent<Character>();
+            Character att =  attacker.GetComponent<Character>();
             if (attacker != character)
             {
                 character.OnDeath();
+                att.RemoveTargetFormList(character);
                 LeanPool.Despawn(gameObject);
             }
             

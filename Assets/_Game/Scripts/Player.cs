@@ -16,7 +16,7 @@ public class Player : Character
             isIdle = false;
             ChangeAnim(CacheString.ANIM_RUN);
         }
-        else
+        else if(!isAttack)
         {
             isIdle = true;
             ChangeAnim(CacheString.ANIM_IDLE);
