@@ -1,5 +1,4 @@
 using Lean.Pool;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 public class Character : MonoBehaviour
@@ -35,29 +34,31 @@ public class Character : MonoBehaviour
     {
         OnInit();
         SpawnWeapon();
+        GameManager.Instance.ChangeStage(GameState.MainMenu);
     }
     public virtual void Start()
     {
-        
+
     }
 
-    
+
 
     public virtual void Update()
     {
-        if (isDead)
+        if (GameManager.Instance.IsStage(GameState.GamePlay))
         {
-            return;
+            if (isDead)
+            {
+                return;
+            }
+
+            FindClosestTarget(transform.position, listTarget);
+
+            if (isIdle && !isAttack && mainTarget != null)
+            {
+                Attack();
+            }
         }
-
-        FindClosestTarget(transform.position, listTarget);
-
-        if (isIdle && !isAttack && mainTarget != null)
-        {
-            Attack();
-        }
-
-
     }
 
     private void SpawnWeapon()
@@ -68,36 +69,29 @@ public class Character : MonoBehaviour
     public void RemoveTargetWhenHit(Character attacker)
     {
         listTarget.Remove(attacker);
-        
+
     }
+
+
     public void Attack()
     {
-        
         isAttack = true;
         ChangeAnim(CacheString.ANIM_ATTACK);
         transform.LookAt(mainTarget.transform.position);
         Invoke(nameof(SpawnBullet), 0.4f);
-        //Invoke(nameof(ResetAttack), 0.7f);
+        
     }
 
-    private void SpawnBullet()
+    public void SpawnBullet()
     {
-        
-        if(mainTarget != null)
-        {
-            direc = mainTarget.transform.position - transform.position;
+        direc = mainTarget.transform.position - transform.position;
 
-            Bullet spawnBullet = LeanPool.Spawn(weaponData.bullet, firePos.position, firePos.rotation);
-            bulletOjb = spawnBullet.GetComponent<Bullet>();
-            bulletOjb.SeekAttacker(this);
-            bulletOjb.SeekDirec(direc);
-            holdWeapon.gameObject.SetActive(false);
-            if (isAttack)
-            {
-                bulletOjb.OnDespawn(timeDestroy);
-                Invoke(nameof(ResetAttack), timeDestroy);
-            }
-        }
+        Bullet spawnBullet = LeanPool.Spawn(weaponData.bullet, firePos.position, firePos.rotation);
+        bulletOjb = spawnBullet.GetComponent<Bullet>();
+        bulletOjb.SeekAttacker(this);
+        bulletOjb.SeekDirec(direc);
+        holdWeapon.gameObject.SetActive(false);
+        bulletOjb.OnDespawn(timeDestroy);
 
     }
 
@@ -105,9 +99,11 @@ public class Character : MonoBehaviour
 
     public void ResetAttack()
     {
-        //isAttack = false;
-        holdWeapon.gameObject.SetActive(true);
-        
+        if(isAttack)
+        {
+            isAttack = false;
+            holdWeapon.gameObject.SetActive(true);
+        }
     }
 
     public virtual void OnInit()

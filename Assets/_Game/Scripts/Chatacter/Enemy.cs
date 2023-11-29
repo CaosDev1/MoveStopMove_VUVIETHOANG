@@ -12,7 +12,7 @@ public class Enemy : Character
     private Vector3 newPos;
 
     //private string botName = null;
-    public bool isEndPoint => Vector3.Distance(transform.position,newPos) < 1.1f;
+    public bool isEndPoint => Vector3.Distance(transform.position, newPos) < 1.1f;
 
     public override void Start()
     {
@@ -22,13 +22,12 @@ public class Enemy : Character
     public override void Update()
     {
         base.Update();
-        
+
         if (currentState != null && !isDead)
         {
             currentState.OnExecute(this);
         }
         //Debug.Log($"Character Pos: {transform.position}");
-        
     }
 
     public override void OnInit()
@@ -41,10 +40,10 @@ public class Enemy : Character
 
     private void SetNameEnemy(string characterName)
     {
-        if(characterName == null)
+        if (characterName == null)
         {
             List<NameData> nameDatas = DataManager.Instance.nameDataSO.listName;
-            
+
         }
     }
 
@@ -83,7 +82,7 @@ public class Enemy : Character
     public void SetDirection()
     {
         newPos = RandomNavSphere(transform.position, wanderRadius, -1);
-        
+
         agent.SetDestination(newPos);
     }
 

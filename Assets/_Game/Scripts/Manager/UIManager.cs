@@ -14,9 +14,12 @@ public class UIManager : Singleton<UIManager>
         playerButton.onClick.AddListener(DoPlayButton);
     }
 
+
+
     private void DoPlayButton()
     {
         mainMenu.SetActive(false);
         canvaJoystick.SetActive(true);
+        GameManager.Instance.ChangeStage(GameState.GamePlay);
     }
 }

@@ -1890,6 +1890,7 @@ GameObject:
   - component: {fileID: 1017658774247514430}
   - component: {fileID: 4456147135357074933}
   - component: {fileID: 1017658774247514369}
+  - component: {fileID: 8584598493472208249}
   m_Layer: 6
   m_Name: Enemy
   m_TagString: Enemy
@@ -1990,6 +1991,32 @@ MonoBehaviour:
   timeDestroy: 1
   agent: {fileID: 4456147135357074933}
   wanderRadius: 10
+--- !u!114 &8584598493472208249
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1017658774247514368}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c08470e2a2343b14e90107557e5208ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  visible: 1
+  renderers: []
+  style:
+    texture: {fileID: 2800000, guid: 689d52942dc71174fadb78bf5de269d0, type: 3}
+    color: {r: 1, g: 1, b: 1, a: 1}
+    width: 32
+    height: 32
+  showArrow: 1
+  arrowStyle:
+    texture: {fileID: 2800000, guid: b14d512c127ad2545b2ce2126a7690c6, type: 3}
+    color: {r: 1, g: 0.4764151, b: 0.72431594, a: 1}
+    margin: 0
+    width: 100
+    height: 100
 --- !u!1 &1017658774258520283
 GameObject:
   m_ObjectHideFlags: 0

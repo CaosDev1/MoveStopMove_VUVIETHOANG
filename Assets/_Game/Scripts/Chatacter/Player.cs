@@ -4,8 +4,6 @@ public class Player : Character
 {
     [SerializeField] protected DynamicJoystick joystick;
 
-   
-
     private void FixedUpdate()
     {
         if (isDead) return;
@@ -17,6 +15,7 @@ public class Player : Character
             transform.rotation = Quaternion.LookRotation(rb.velocity);
             isIdle = false;
             ChangeAnim(CacheString.ANIM_RUN);
+            CancelInvoke(nameof(SpawnBullet));
         }
         else if(!isAttack)
         {

@@ -29,12 +29,6 @@ public class Bullet : MonoBehaviour
     public void OnDespawn(float timeDespawn)
     {
         LeanPool.Despawn(gameObject, timeDespawn);
-        Invoke(nameof(ChangeIsAttack), timeDespawn);
-    }
-
-    public void ChangeIsAttack()
-    {
-        attacker.GetComponent<Character>().isAttack = false;
     }
 
 
