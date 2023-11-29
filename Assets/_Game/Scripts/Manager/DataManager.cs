@@ -5,6 +5,7 @@ using UnityEngine;
 public class DataManager : Singleton<DataManager>
 {
     public WeaponDataSO weaponDataSO;
+    public NameDataSO nameDataSO;
 
     public WeaponData GetWeaponData(WeaponType weaponType)
     {
@@ -16,6 +17,18 @@ public class DataManager : Singleton<DataManager>
                 return weapons[i];
             }
         }
+        
+        return null;
+    }
+
+    public NameData GetNameData(string characterName)
+    {
+        List<NameData> nameDatas = nameDataSO.listName;
+        for (int i = 0; i < nameDatas.Count; i++)
+        {
+            
+        }
+
         
         return null;
     }

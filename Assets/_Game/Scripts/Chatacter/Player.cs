@@ -4,6 +4,8 @@ public class Player : Character
 {
     [SerializeField] protected DynamicJoystick joystick;
 
+   
+
     private void FixedUpdate()
     {
         if (isDead) return;

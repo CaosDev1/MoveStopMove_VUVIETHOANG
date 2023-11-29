@@ -13,6 +13,8 @@ public class PatrolState : IState
     public void OnEnter(Enemy enemy)
     {
         enemy.SetDirection();
+        enemy.isAttack = false;
+        enemy.isIdle = false;
     }
     public void OnExecute(Enemy enemy)
     {
@@ -30,7 +32,7 @@ public class PatrolState : IState
             enemy.isIdle = false;
             enemy.ChangeAnim(CacheString.ANIM_RUN);
         }
-        else
+        else if(!enemy.isAttack)
         {
             enemy.isIdle = true;
             enemy.ChangeAnim(CacheString.ANIM_IDLE);

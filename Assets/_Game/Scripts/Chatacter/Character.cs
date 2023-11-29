@@ -55,8 +55,9 @@ public class Character : MonoBehaviour
         if (isIdle && !isAttack && mainTarget != null)
         {
             Attack();
-
         }
+
+
     }
 
     private void SpawnWeapon()
@@ -64,36 +65,47 @@ public class Character : MonoBehaviour
         Instantiate(weaponData.weapon, holdWeapon);
     }
 
-    public void RemoveTargetFormList(Character attacker)
+    public void RemoveTargetWhenHit(Character attacker)
     {
         listTarget.Remove(attacker);
         
     }
     public void Attack()
     {
-        ChangeAnim(CacheString.ANIM_ATTACK);
-        StartCoroutine(SpawnBullet(0.2f));
-        Invoke(nameof(ResetAttack), 1f);
-        bulletOjb.OnDespawn(timeDestroy);
+        
         isAttack = true;
+        ChangeAnim(CacheString.ANIM_ATTACK);
+        transform.LookAt(mainTarget.transform.position);
+        Invoke(nameof(SpawnBullet), 0.4f);
+        //Invoke(nameof(ResetAttack), 0.7f);
     }
 
-    IEnumerator SpawnBullet(float time)
+    private void SpawnBullet()
     {
-        direc = mainTarget.transform.position - transform.position;
-        Bullet spawnBullet = LeanPool.Spawn(weaponData.bullet, firePos.position, firePos.rotation);
-        bulletOjb = spawnBullet.GetComponent<Bullet>();
-        bulletOjb.SeekAttacker(this);
-        bulletOjb.SeekDirec(direc);
-        holdWeapon.gameObject.SetActive(false);
-        yield return new WaitForSeconds(time);
+        
+        if(mainTarget != null)
+        {
+            direc = mainTarget.transform.position - transform.position;
+
+            Bullet spawnBullet = LeanPool.Spawn(weaponData.bullet, firePos.position, firePos.rotation);
+            bulletOjb = spawnBullet.GetComponent<Bullet>();
+            bulletOjb.SeekAttacker(this);
+            bulletOjb.SeekDirec(direc);
+            holdWeapon.gameObject.SetActive(false);
+            if (isAttack)
+            {
+                bulletOjb.OnDespawn(timeDestroy);
+                Invoke(nameof(ResetAttack), timeDestroy);
+            }
+        }
+
     }
 
-    
+
 
     public void ResetAttack()
     {
-        isAttack = false;
+        //isAttack = false;
         holdWeapon.gameObject.SetActive(true);
         
     }
