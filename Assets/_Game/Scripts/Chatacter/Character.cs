@@ -79,7 +79,6 @@ public class Character : MonoBehaviour
         ChangeAnim(CacheString.ANIM_ATTACK);
         transform.LookAt(mainTarget.transform.position);
         Invoke(nameof(SpawnBullet), 0.4f);
-        
     }
 
     public void SpawnBullet()
