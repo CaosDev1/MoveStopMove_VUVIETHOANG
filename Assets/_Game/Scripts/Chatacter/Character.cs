@@ -24,6 +24,9 @@ public class Character : MonoBehaviour
     [SerializeField] protected Transform holdWeapon;
     [SerializeField] protected Transform firePos;
     [SerializeField] protected float timeDestroy;
+
+    protected bool canAttack;
+
     protected WeaponData weaponData;
     protected Bullet bulletOjb;
 
@@ -35,30 +38,6 @@ public class Character : MonoBehaviour
         OnInit();
         SpawnWeapon();
         GameManager.Instance.ChangeStage(GameState.MainMenu);
-    }
-    public virtual void Start()
-    {
-
-    }
-
-
-
-    public virtual void Update()
-    {
-        if (GameManager.Instance.IsStage(GameState.GamePlay))
-        {
-            if (isDead)
-            {
-                return;
-            }
-
-            FindClosestTarget(transform.position, listTarget);
-
-            if (isIdle && !isAttack && mainTarget != null)
-            {
-                Attack();
-            }
-        }
     }
 
     private void SpawnWeapon()
@@ -76,33 +55,36 @@ public class Character : MonoBehaviour
     public void Attack()
     {
         isAttack = true;
-        ChangeAnim(CacheString.ANIM_ATTACK);
         transform.LookAt(mainTarget.transform.position);
+        ChangeAnim(CacheString.ANIM_ATTACK);
         Invoke(nameof(SpawnBullet), 0.4f);
+
+
     }
+
+    //public bool IsShoot()
+    //{
+    //    bool isShoot = false;
+
+    //    return isShoot;
+    //}
 
     public void SpawnBullet()
     {
         direc = mainTarget.transform.position - transform.position;
-
         Bullet spawnBullet = LeanPool.Spawn(weaponData.bullet, firePos.position, firePos.rotation);
         bulletOjb = spawnBullet.GetComponent<Bullet>();
         bulletOjb.SeekAttacker(this);
         bulletOjb.SeekDirec(direc);
         holdWeapon.gameObject.SetActive(false);
         bulletOjb.OnDespawn(timeDestroy);
-
+        Invoke(nameof(ResetAttack), 0.4f);
     }
-
-
 
     public void ResetAttack()
     {
-        if(isAttack)
-        {
-            isAttack = false;
-            holdWeapon.gameObject.SetActive(true);
-        }
+        isAttack = false;
+        holdWeapon.gameObject.SetActive(true);
     }
 
     public virtual void OnInit()
@@ -110,7 +92,7 @@ public class Character : MonoBehaviour
         isDead = false;
         isIdle = true;
         isAttack = false;
-        ChangeAnim(CacheString.ANIM_IDLE);
+        //ChangeAnim(CacheString.ANIM_IDLE);
     }
 
     public virtual void OnDeath()
@@ -128,7 +110,7 @@ public class Character : MonoBehaviour
 
     }
 
-    private void FindClosestTarget(Vector3 playerPosition, List<Character> listTarget)
+    public void FindClosestTarget(Vector3 playerPosition, List<Character> listTarget)
     {
         float closestDistance = Mathf.Infinity;
         if (listTarget.Count > 0)

@@ -14,15 +14,12 @@ public class Enemy : Character
     //private string botName = null;
     public bool isEndPoint => Vector3.Distance(transform.position, newPos) < 1.1f;
 
-    public override void Start()
+    private void Start()
     {
-        base.Start();
         ChangeState(new PatrolState());
     }
-    public override void Update()
+    private void Update()
     {
-        base.Update();
-
         if (currentState != null && !isDead)
         {
             currentState.OnExecute(this);
@@ -33,6 +30,7 @@ public class Enemy : Character
     public override void OnInit()
     {
         base.OnInit();
+        mainTarget = null;
         listTarget.Clear();
         SetWeaponEnemy();
         ChangeState(new PatrolState());

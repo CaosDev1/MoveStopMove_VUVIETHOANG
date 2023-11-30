@@ -19,7 +19,7 @@ public class PatrolState : IState
     public void OnExecute(Enemy enemy)
     {
         timer += Time.deltaTime;
-
+        //Enemy random move
         if(timer >= wanderTimer && !enemy.isAttack)
         {
             enemy.SetDirection();
@@ -30,6 +30,7 @@ public class PatrolState : IState
         if (!enemy.isEndPoint)
         {
             enemy.isIdle = false;
+            enemy.isAttack = false;
             enemy.ChangeAnim(CacheString.ANIM_RUN);
         }
         else if(!enemy.isAttack)

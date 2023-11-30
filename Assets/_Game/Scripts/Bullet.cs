@@ -43,7 +43,7 @@ public class Bullet : MonoBehaviour
                 character.OnDeath();
                 att.RemoveTargetWhenHit(character);
                 LeanPool.Despawn(gameObject);
-                att.isAttack = false;
+                
             }
             
         }

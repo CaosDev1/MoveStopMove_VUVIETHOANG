@@ -4,6 +4,24 @@ public class Player : Character
 {
     [SerializeField] protected DynamicJoystick joystick;
 
+    private void Update()
+    {
+        if (GameManager.Instance.IsStage(GameState.GamePlay))
+        {
+            if (isDead)
+            {
+                return;
+            }
+
+            FindClosestTarget(transform.position, listTarget);
+
+            if (isIdle && !isAttack && mainTarget != null)
+            {
+                Attack();
+            }
+        }
+    }
+
     private void FixedUpdate()
     {
         if (isDead) return;
@@ -14,12 +32,17 @@ public class Player : Character
         {
             transform.rotation = Quaternion.LookRotation(rb.velocity);
             isIdle = false;
+            if (isAttack)
+            {
+                ResetAttack();
+            }
             ChangeAnim(CacheString.ANIM_RUN);
             CancelInvoke(nameof(SpawnBullet));
         }
         else if(!isAttack)
         {
             isIdle = true;
+            
             ChangeAnim(CacheString.ANIM_IDLE);
         }
 
