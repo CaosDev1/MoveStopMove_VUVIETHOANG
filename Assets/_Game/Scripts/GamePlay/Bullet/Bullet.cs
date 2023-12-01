@@ -10,7 +10,7 @@ public class Bullet : MonoBehaviour
     private Character attacker;
     private Vector3 direction;
     
-    private void Update()
+    public virtual void Update()
     {
         rb.velocity = direction.normalized * speed;
     }
@@ -36,14 +36,13 @@ public class Bullet : MonoBehaviour
     {
         if (other.CompareTag(CacheString.BOT_TAG) || other.CompareTag(CacheString.PLAYER_TAG))
         {
-            Character character = other.GetComponent<Character>();
-            Character att =  attacker.GetComponent<Character>();
-            if (attacker != character)
+            Character victim = other.GetComponent<Character>();
+            if (attacker != victim)
             {
-                character.OnDeath();
-                att.RemoveTargetWhenHit(character);
+                victim.OnDeath();
+                attacker.RemoveTargetWhenHit(victim);
                 LeanPool.Despawn(gameObject);
-                att.ResetAttack();
+                attacker.ResetAttack();
             }
             
         }

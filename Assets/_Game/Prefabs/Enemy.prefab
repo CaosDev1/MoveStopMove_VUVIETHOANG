@@ -1990,6 +1990,7 @@ MonoBehaviour:
   holdWeapon: {fileID: 1017658774267602933}
   firePos: {fileID: 1017658773336999124}
   timeDestroy: 1
+  delayShootTime: 0.4
   agent: {fileID: 4456147135357074933}
   wanderRadius: 10
   targetIcon: {fileID: 4486373319592149357}

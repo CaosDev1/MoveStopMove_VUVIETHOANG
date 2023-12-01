@@ -12,7 +12,7 @@ public class Character : MonoBehaviour
     public bool isIdle;
     public bool isAttack = false;
     public bool isDead = false;
-
+    private Transform myTransform;
     [Header("Collier Info")]
     protected Character mainTarget;
     protected List<Character> listTarget = new List<Character>();
@@ -24,7 +24,7 @@ public class Character : MonoBehaviour
     [SerializeField] protected Transform holdWeapon;
     [SerializeField] protected Transform firePos;
     [SerializeField] protected float timeDestroy;
-
+    [SerializeField] protected float delayShootTime;
     protected bool canAttack;
 
     protected WeaponData weaponData;
@@ -35,11 +35,16 @@ public class Character : MonoBehaviour
 
     private void Awake()
     {
+        
         OnInit();
         SpawnWeapon();
         GameManager.Instance.ChangeStage(GameState.MainMenu);
     }
 
+    public virtual void Update()
+    {
+        FindClosestTarget(transform.position, listTarget);
+    }
     private void SpawnWeapon()
     {
         Instantiate(weaponData.weapon, holdWeapon);
@@ -54,12 +59,10 @@ public class Character : MonoBehaviour
 
     public void Attack()
     {
-        isAttack = true;
         transform.LookAt(mainTarget.transform.position);
+        isAttack = true;
         ChangeAnim(CacheString.ANIM_ATTACK);
-        Invoke(nameof(Shoot), 0.4f);
-
-
+        Invoke(nameof(Shoot), delayShootTime);
     }
 
     //public bool IsShoot()
@@ -71,18 +74,17 @@ public class Character : MonoBehaviour
 
     public void Shoot()
     {
-        if(mainTarget != null)
+        if (mainTarget != null)
         {
             direc = mainTarget.transform.position - transform.position;
             Bullet spawnBullet = LeanPool.Spawn(weaponData.bullet, firePos.position, firePos.rotation);
-            bulletOjb = spawnBullet.GetComponent<Bullet>();
-            bulletOjb.SeekAttacker(this);
-            bulletOjb.SeekDirec(direc);
+            spawnBullet.SeekAttacker(this);
+            spawnBullet.SeekDirec(direc);
+            spawnBullet.OnDespawn(timeDestroy);
             holdWeapon.gameObject.SetActive(false);
-            bulletOjb.OnDespawn(timeDestroy);
             Invoke(nameof(ResetAttack), 0.4f);
         }
-        
+
     }
 
     public void ResetAttack()

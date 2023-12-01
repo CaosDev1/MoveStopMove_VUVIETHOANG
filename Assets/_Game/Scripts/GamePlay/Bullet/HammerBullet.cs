@@ -4,5 +4,9 @@ using UnityEngine;
 
 public class HammerBullet : Bullet
 {
-    
+    public override void Update()
+    {
+        base.Update();
+        
+    }
 }

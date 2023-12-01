@@ -8,7 +8,7 @@ public class UIManager : Singleton<UIManager>
     [SerializeField] private GameObject mainMenu;
     [SerializeField] private GameObject canvaJoystick;
     [SerializeField] private Button playerButton;
-
+    [SerializeField] private Canvas testFinish;
     private void OnEnable()
     {
         playerButton.onClick.AddListener(DoPlayButton);
@@ -22,4 +22,10 @@ public class UIManager : Singleton<UIManager>
         canvaJoystick.SetActive(true);
         GameManager.Instance.ChangeStage(GameState.GamePlay);
     }
+
+    public void DoFinish()
+    {
+        testFinish.gameObject.SetActive(true);
+    }
+
 }

@@ -18,8 +18,9 @@ public class Enemy : Character
     {
         ChangeState(new PatrolState());
     }
-    private void Update()
+    public override void Update()
     {
+        base.Update();
         if (currentState != null && !isDead)
         {
             currentState.OnExecute(this);

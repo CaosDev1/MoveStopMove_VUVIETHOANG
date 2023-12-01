@@ -4,22 +4,19 @@ public class Player : Character
 {
     [SerializeField] protected DynamicJoystick joystick;
 
-    private void Update()
+    public override void Update()
     {
-        if (GameManager.Instance.IsStage(GameState.GamePlay))
+        base.Update();
+        if (isDead)
         {
-            if (isDead)
-            {
-                return;
-            }
-
-            FindClosestTarget(transform.position, listTarget);
-
-            if (isIdle && !isAttack && mainTarget != null)
-            {
-                Attack();
-            }
+            return;
         }
+
+        if (isIdle && !isAttack && mainTarget != null)
+        {
+            Attack();
+        }
+
     }
 
     private void FixedUpdate()
@@ -62,6 +59,8 @@ public class Player : Character
     {
         base.OnDeath();
         //TO DO: Pop up UI when player die
+        UIManager.Instance.DoFinish();
+        GameManager.Instance.ChangeStage(GameState.Finish);
 
     }
 }
