@@ -31,7 +31,7 @@ public class Character : MonoBehaviour
     protected Bullet bulletOjb;
 
     public Animator Anim { get => anim; set => anim = value; }
-
+    public Character MainTarget { get => mainTarget; set => mainTarget = value; }
 
     private void Awake()
     {
@@ -57,7 +57,7 @@ public class Character : MonoBehaviour
         isAttack = true;
         transform.LookAt(mainTarget.transform.position);
         ChangeAnim(CacheString.ANIM_ATTACK);
-        Invoke(nameof(SpawnBullet), 0.4f);
+        Invoke(nameof(Shoot), 0.4f);
 
 
     }
@@ -69,16 +69,20 @@ public class Character : MonoBehaviour
     //    return isShoot;
     //}
 
-    public void SpawnBullet()
+    public void Shoot()
     {
-        direc = mainTarget.transform.position - transform.position;
-        Bullet spawnBullet = LeanPool.Spawn(weaponData.bullet, firePos.position, firePos.rotation);
-        bulletOjb = spawnBullet.GetComponent<Bullet>();
-        bulletOjb.SeekAttacker(this);
-        bulletOjb.SeekDirec(direc);
-        holdWeapon.gameObject.SetActive(false);
-        bulletOjb.OnDespawn(timeDestroy);
-        Invoke(nameof(ResetAttack), 0.4f);
+        if(mainTarget != null)
+        {
+            direc = mainTarget.transform.position - transform.position;
+            Bullet spawnBullet = LeanPool.Spawn(weaponData.bullet, firePos.position, firePos.rotation);
+            bulletOjb = spawnBullet.GetComponent<Bullet>();
+            bulletOjb.SeekAttacker(this);
+            bulletOjb.SeekDirec(direc);
+            holdWeapon.gameObject.SetActive(false);
+            bulletOjb.OnDespawn(timeDestroy);
+            Invoke(nameof(ResetAttack), 0.4f);
+        }
+        
     }
 
     public void ResetAttack()
@@ -129,14 +133,12 @@ public class Character : MonoBehaviour
         {
             mainTarget = null;
         }
-
-
     }
 
-    private void OnTriggerEnter(Collider other)
+    public virtual void OnTriggerEnter(Collider other)
     {
         //Add target on list when target enter range
-        if (other.CompareTag(CacheString.BOT_TAG) || other.CompareTag(CacheString.PLAYER_TAG))
+        if (other.gameObject.layer == LayerMask.NameToLayer(CacheString.CHARACTER_LAYER))
         {
             Character target = other.GetComponent<Character>();
             if (target != this && !target.isDead)
@@ -158,7 +160,7 @@ public class Character : MonoBehaviour
         }
     }
 
-    private void OnTriggerExit(Collider other)
+    public virtual void OnTriggerExit(Collider other)
     {
         //Remove target form list when target exit range
         if (other.gameObject.layer == LayerMask.NameToLayer(CacheString.CHARACTER_LAYER))

@@ -35,14 +35,15 @@ public class Player : Character
             if (isAttack)
             {
                 ResetAttack();
+                CancelInvoke(nameof(Shoot));
             }
             ChangeAnim(CacheString.ANIM_RUN);
-            CancelInvoke(nameof(SpawnBullet));
+
         }
-        else if(!isAttack)
+        else if (!isAttack)
         {
             isIdle = true;
-            
+
             ChangeAnim(CacheString.ANIM_IDLE);
         }
 
@@ -61,6 +62,6 @@ public class Player : Character
     {
         base.OnDeath();
         //TO DO: Pop up UI when player die
-        
+
     }
 }

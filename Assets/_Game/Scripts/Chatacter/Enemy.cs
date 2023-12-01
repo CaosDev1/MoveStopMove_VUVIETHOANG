@@ -7,7 +7,7 @@ public class Enemy : Character
 {
     public NavMeshAgent agent;
     public float wanderRadius = 6f;
-    //[SerializeField] protected GameObject indicator;
+    [SerializeField] protected GameObject targetIcon;
     private IState currentState;
     private Vector3 newPos;
 
@@ -41,7 +41,7 @@ public class Enemy : Character
         if (characterName == null)
         {
             List<NameData> nameDatas = DataManager.Instance.nameDataSO.listName;
-
+            //TO DO: How to get name enemy?
         }
     }
 
@@ -56,14 +56,14 @@ public class Enemy : Character
         }
     }
 
-    public void TurnOnIndicator()
+    public void TurnOnTargetIcon()
     {
-        //indicator.SetActive(true);
+        targetIcon.SetActive(true);
     }
 
-    public void TurnOffIndicator()
+    public void TurnOffTargetIcon()
     {
-        //indicator.SetActive(false);
+        targetIcon.SetActive(false);
     }
 
     public override void OnDeath()

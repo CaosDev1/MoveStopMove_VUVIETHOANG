@@ -26,7 +26,7 @@ public class PatrolState : IState
             timer = 0f;
             wanderTimer = Random.Range(3f, 5f);
         }
-
+        
         if (!enemy.isEndPoint)
         {
             enemy.isIdle = false;
@@ -37,6 +37,9 @@ public class PatrolState : IState
         {
             enemy.isIdle = true;
             enemy.ChangeAnim(CacheString.ANIM_IDLE);
+        }else if(enemy.MainTarget != null)
+        {
+            enemy.ChangeState(new AttackState());
         }
     }
 
