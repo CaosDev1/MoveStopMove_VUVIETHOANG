@@ -16,7 +16,7 @@ public class Character : MonoBehaviour
     [Header("Collier Info")]
     protected Character mainTarget;
     protected List<Character> listTarget = new List<Character>();
-    
+
     protected Vector3 direc;
 
     [Header("Weapon Info")]
@@ -25,7 +25,7 @@ public class Character : MonoBehaviour
     [SerializeField] protected Transform firePos;
     [SerializeField] protected float timeDestroy;
     [SerializeField] protected float delayShootTime;
-    
+
 
     protected WeaponData weaponData;
     protected Bullet bulletOjb;
@@ -35,7 +35,7 @@ public class Character : MonoBehaviour
 
     private void Awake()
     {
-        
+
         OnInit();
         SpawnWeapon();
         GameManager.Instance.ChangeStage(GameState.MainMenu);
@@ -45,7 +45,10 @@ public class Character : MonoBehaviour
     {
         if (GameManager.Instance.IsStage(GameState.GamePlay))
         {
-            FindClosestTarget(transform.position, listTarget);
+            if (this != null)
+            {
+                FindClosestTarget(transform.position, listTarget);
+            }
         }
     }
     private void SpawnWeapon()
@@ -65,7 +68,7 @@ public class Character : MonoBehaviour
         transform.LookAt(mainTarget.transform.position);
         isAttack = true;
         ChangeAnim(CacheString.ANIM_ATTACK);
-        
+
         Invoke(nameof(Shoot), delayShootTime);
         Invoke(nameof(ResetAttack), 0.6f);
     }
@@ -87,7 +90,7 @@ public class Character : MonoBehaviour
             spawnBullet.SeekDirec(direc);
             spawnBullet.OnDespawn(timeDestroy);
             holdWeapon.gameObject.SetActive(false);
-            
+
         }
 
     }
@@ -95,7 +98,7 @@ public class Character : MonoBehaviour
     public void ResetAttack()
     {
         isAttack = false;
-        
+
         holdWeapon.gameObject.SetActive(true);
     }
 
@@ -174,24 +177,28 @@ public class Character : MonoBehaviour
         if (other.gameObject.layer == LayerMask.NameToLayer(CacheString.CHARACTER_LAYER))
         {
             Character targetout = other.GetComponent<Character>();
-            //listTarget.Remove(targetout);
+            listTarget.Remove(targetout);
+            if (listTarget.Count == 0)
+            {
+                mainTarget = null;
+            }
             //Enemy exit range will be remove form list or main target
-            if (mainTarget == targetout)
-            {
-                if (listTarget.Count > 0)
-                {
-                    mainTarget = listTarget[0];
-                    listTarget.RemoveAt(0);
-                }
-                else
-                {
-                    mainTarget = null;
-                }
-            }
-            else
-            {
-                listTarget.Remove(targetout);
-            }
+            //if (mainTarget == targetout)
+            //{
+            //    if (listTarget.Count > 0)
+            //    {
+            //        mainTarget = listTarget[0];
+            //        listTarget.RemoveAt(0);
+            //    }
+            //    else
+            //    {
+            //        mainTarget = null;
+            //    }
+            //}
+            //else
+            //{
+            //    listTarget.Remove(targetout);
+            //}
         }
     }
 

@@ -16,6 +16,7 @@ public enum WeaponType
 public class WeaponData
 {
     public WeaponType weaponType;
+    public string weaponName;
     public Weapon weapon;
     public Bullet bullet;
 }

@@ -24,6 +24,7 @@ public class LevelManager : Singleton<LevelManager>
 
             //Enemy spawnEnemy = LeanPool.Spawn(enemyPrefab, new Vector3(randomX, 0f, randomZ), Quaternion.identity);
             Enemy spawnEnemy = LeanPool.Spawn(enemyPrefab, RandomNavSphere(Vector3.zero, 50f, -1), Quaternion.identity);
+            
             enemies.Add(spawnEnemy);
         }
     }

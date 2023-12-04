@@ -59,7 +59,7 @@ public class Player : Character
     {
         base.OnDeath();
         //TO DO: Pop up UI when player die
-        UIManager.Instance.DoFinish();
+        //UIManager.Instance.DoFinish();
         GameManager.Instance.ChangeStage(GameState.Finish);
 
     }

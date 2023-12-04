@@ -1,31 +1,41 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class UIManager : Singleton<UIManager>
 {
-    [SerializeField] private GameObject mainMenu;
+    [SerializeField] private GameObject mainMenuUI;
     [SerializeField] private GameObject canvaJoystick;
-    [SerializeField] private Button playerButton;
-    [SerializeField] private Canvas testFinish;
-    private void OnEnable()
+    [SerializeField] private GameObject finishUI;
+    [SerializeField] private GameObject weaponShopUI;
+
+    private void Start()
     {
-        playerButton.onClick.AddListener(DoPlayButton);
+        OpenMainMenu();
+    }
+    public void OpenMainMenu()
+    {
+        mainMenuUI.SetActive(true);
+        canvaJoystick.SetActive(false);
+        weaponShopUI.SetActive(false);
+        finishUI.SetActive(false);
     }
 
-
-
-    private void DoPlayButton()
+    public void DoPlayButton()
     {
-        mainMenu.SetActive(false);
-        canvaJoystick.SetActive(true);
         GameManager.Instance.ChangeStage(GameState.GamePlay);
+        mainMenuUI.SetActive(false);
+        canvaJoystick.SetActive(true);
     }
 
-    public void DoFinish()
+    public void OpenWeaponShop()
     {
-        testFinish.gameObject.SetActive(true);
+        weaponShopUI.SetActive(true);
+        mainMenuUI.SetActive(false);
+
     }
 
+    public void CloseWeaponShop()
+    {
+        weaponShopUI.SetActive(false);
+        mainMenuUI.SetActive(true);
+    }
 }

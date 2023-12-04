@@ -12,36 +12,40 @@ public class PatrolState : IState
 
     public void OnEnter(Enemy enemy)
     {
-        enemy.SetDirection();
-        enemy.isIdle = false;
+        //enemy.SetDirection();
+        enemy.isIdle = true;
         enemy.isAttack = false;
     }
     public void OnExecute(Enemy enemy)
     {
         timer += Time.deltaTime;
-        //Enemy random move
-        if(timer >= wanderTimer && !enemy.isAttack)
+        if (GameManager.Instance.IsStage(GameState.GamePlay))
         {
-            enemy.SetDirection();
-            timer = 0f;
-            wanderTimer = Random.Range(3f, 5f);
-        }
-        
-        if (!enemy.isEndPoint)
-        {
-            enemy.isIdle = false;
-            enemy.isAttack = false;
-            enemy.ChangeAnim(CacheString.ANIM_RUN);
-        }
-        else if(!enemy.isAttack)
-        {
-            enemy.isIdle = true;
-            enemy.ChangeAnim(CacheString.ANIM_IDLE);
-        }
-        
-        if(enemy.isIdle && enemy.MainTarget != null && !enemy.isAttack)
-        {
-            enemy.ChangeState(new AttackState());
+            
+            //Enemy random move
+            if (timer >= wanderTimer && !enemy.isAttack)
+            {
+                enemy.SetDirection();
+                timer = 0f;
+                wanderTimer = Random.Range(3f, 5f);
+            }
+
+            if (!enemy.isEndPoint)
+            {
+                enemy.isIdle = false;
+                enemy.isAttack = false;
+                enemy.ChangeAnim(CacheString.ANIM_RUN);
+            }
+            else if (!enemy.isAttack)
+            {
+                enemy.isIdle = true;
+                enemy.ChangeAnim(CacheString.ANIM_IDLE);
+            }
+
+            if (enemy.isIdle && enemy.MainTarget != null && !enemy.isAttack)
+            {
+                enemy.ChangeState(new AttackState());
+            }
         }
     }
 

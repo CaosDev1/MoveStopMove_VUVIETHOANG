@@ -8,7 +8,7 @@ public class Enemy : Character
     public NavMeshAgent agent;
     public float wanderRadius = 6f;
     [SerializeField] protected GameObject targetIcon;
-    private IState currentState;
+    public IState currentState;
     private Vector3 newPos;
 
     //private string botName = null;
@@ -16,7 +16,7 @@ public class Enemy : Character
 
     private void Start()
     {
-        ChangeState(new PatrolState());
+        currentState = new PatrolState();
     }
     public override void Update()
     {
