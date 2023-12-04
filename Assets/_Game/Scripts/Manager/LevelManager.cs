@@ -31,7 +31,7 @@ public class LevelManager : Singleton<LevelManager>
     public void EnemyDeath(Enemy enemy)
     {
         enemies.Remove(enemy);
-        //TO DO: Check logic spawn enemy
+        
         if(enemies.Count < maxEnemySpawn)
         {
             StartCoroutine(AddEnemy(Random.Range(minTimespawn,maxTimespawn)));

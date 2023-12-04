@@ -37,6 +37,7 @@ public class Bullet : MonoBehaviour
         if (other.CompareTag(CacheString.BOT_TAG) || other.CompareTag(CacheString.PLAYER_TAG))
         {
             Character victim = other.GetComponent<Character>();
+            
             if (attacker != victim)
             {
                 victim.OnDeath();

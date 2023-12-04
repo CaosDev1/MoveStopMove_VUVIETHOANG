@@ -16,7 +16,7 @@ public class Character : MonoBehaviour
     [Header("Collier Info")]
     protected Character mainTarget;
     protected List<Character> listTarget = new List<Character>();
-
+    
     protected Vector3 direc;
 
     [Header("Weapon Info")]
@@ -25,7 +25,7 @@ public class Character : MonoBehaviour
     [SerializeField] protected Transform firePos;
     [SerializeField] protected float timeDestroy;
     [SerializeField] protected float delayShootTime;
-    protected bool canAttack;
+    
 
     protected WeaponData weaponData;
     protected Bullet bulletOjb;
@@ -43,7 +43,10 @@ public class Character : MonoBehaviour
 
     public virtual void Update()
     {
-        FindClosestTarget(transform.position, listTarget);
+        if (GameManager.Instance.IsStage(GameState.GamePlay))
+        {
+            FindClosestTarget(transform.position, listTarget);
+        }
     }
     private void SpawnWeapon()
     {
@@ -62,7 +65,9 @@ public class Character : MonoBehaviour
         transform.LookAt(mainTarget.transform.position);
         isAttack = true;
         ChangeAnim(CacheString.ANIM_ATTACK);
+        
         Invoke(nameof(Shoot), delayShootTime);
+        Invoke(nameof(ResetAttack), 0.6f);
     }
 
     //public bool IsShoot()
@@ -82,7 +87,7 @@ public class Character : MonoBehaviour
             spawnBullet.SeekDirec(direc);
             spawnBullet.OnDespawn(timeDestroy);
             holdWeapon.gameObject.SetActive(false);
-            Invoke(nameof(ResetAttack), 0.4f);
+            
         }
 
     }
@@ -90,6 +95,7 @@ public class Character : MonoBehaviour
     public void ResetAttack()
     {
         isAttack = false;
+        
         holdWeapon.gameObject.SetActive(true);
     }
 
