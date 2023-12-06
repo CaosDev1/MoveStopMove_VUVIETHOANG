@@ -13,14 +13,14 @@ MonoBehaviour:
   m_Name: New Weapon Data SO
   m_EditorClassIdentifier: 
   listWeaponData:
-  - weaponType: 2
-    weaponName: Uzi
-    weapon: {fileID: 4153155463698869094, guid: 57a444597a68fae40ba9607920632b5c, type: 3}
-    bullet: {fileID: 6659486910559968269, guid: f9449a35e13f43d469ff2fc7ca609d61, type: 3}
   - weaponType: 3
     weaponName: Axe
     weapon: {fileID: 5463698144751993299, guid: b5bc2b0446380554daad4a0113bd822e, type: 3}
     bullet: {fileID: 1932025860055926651, guid: 41a8c182699d12546a385ebe0a4fdff6, type: 3}
+  - weaponType: 4
+    weaponName: Boomerang
+    weapon: {fileID: 26566684193214064, guid: bbc8555361b7efd4bbbaeab306ed2b6a, type: 3}
+    bullet: {fileID: 7478377292525226255, guid: 6761aa40ca182394f98fd4a234cd2d99, type: 3}
   - weaponType: 0
     weaponName: Hammer
     weapon: {fileID: 4260530005587990301, guid: 7726d3091f5d3634ea9212621fd447fd, type: 3}
@@ -29,7 +29,7 @@ MonoBehaviour:
     weaponName: Knife
     weapon: {fileID: 3519805736663974597, guid: d740e294d28f781499a96105a5cbee0c, type: 3}
     bullet: {fileID: 139648941301728468, guid: 80f34c2dfb859da44974a0a7920dbf1d, type: 3}
-  - weaponType: 4
-    weaponName: Boomerang
-    weapon: {fileID: 26566684193214064, guid: bbc8555361b7efd4bbbaeab306ed2b6a, type: 3}
-    bullet: {fileID: 7478377292525226255, guid: 6761aa40ca182394f98fd4a234cd2d99, type: 3}
+  - weaponType: 2
+    weaponName: Uzi
+    weapon: {fileID: 4153155463698869094, guid: 57a444597a68fae40ba9607920632b5c, type: 3}
+    bullet: {fileID: 6659486910559968269, guid: f9449a35e13f43d469ff2fc7ca609d61, type: 3}

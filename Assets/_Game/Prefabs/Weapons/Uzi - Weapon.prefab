@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4153155463698869095}
   - component: {fileID: 7682702845458880414}
   - component: {fileID: 4153155463698869094}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Uzi - Weapon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
