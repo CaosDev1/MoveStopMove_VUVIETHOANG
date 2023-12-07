@@ -722,7 +722,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -1129,7 +1129,7 @@ MonoBehaviour:
   isIdle: 0
   isAttack: 0
   isDead: 0
-  currentWeaponType: 3
+  currentWeaponType: 0
   holdWeapon: {fileID: 395189537}
   firePos: {fileID: 2071704954}
   timeDestroy: 1
@@ -4113,7 +4113,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &912256753
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4814,7 +4814,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 71
+    m_Bits: 199
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -5795,9 +5795,11 @@ MonoBehaviour:
   nextButton: {fileID: 766266252}
   prevButton: {fileID: 390169097}
   selectButton: {fileID: 423232796}
+  closeButton: {fileID: 1923986751}
   weaponText: {fileID: 103656907}
   weaponData: {fileID: 11400000, guid: 754f52ece6ea03147a997266ac7544e9, type: 2}
   spawnWeaponSkinPos: {fileID: 988905753}
+  player: {fileID: 186188690}
   index: 0
 --- !u!1 &1298950470
 GameObject:
@@ -7792,7 +7794,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}

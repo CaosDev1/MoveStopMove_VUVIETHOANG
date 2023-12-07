@@ -20,24 +20,24 @@ public class Character : MonoBehaviour
     protected Vector3 direc;
 
     [Header("Weapon Info")]
-    [SerializeField] protected WeaponType currentWeaponType;
+    [SerializeField] public WeaponType currentWeaponType;
     [SerializeField] protected Transform holdWeapon;
     [SerializeField] protected Transform firePos;
     [SerializeField] protected float timeDestroy;
     [SerializeField] protected float delayShootTime;
+    private Weapon playerWeapon;
 
-
-    protected WeaponData weaponData;
+    private WeaponData weaponData;
     protected Bullet bulletOjb;
 
     public Animator Anim { get => anim; set => anim = value; }
     public Character MainTarget { get => mainTarget; set => mainTarget = value; }
+    public WeaponData WeaponData { get => weaponData; set => weaponData = value; }
 
     private void Awake()
     {
-
         OnInit();
-        SpawnWeapon();
+        SpawnWeapon(weaponData.weapon);
         GameManager.Instance.ChangeStage(GameState.MainMenu);
     }
 
@@ -51,9 +51,17 @@ public class Character : MonoBehaviour
             }
         }
     }
-    private void SpawnWeapon()
+    public void SpawnWeapon(Weapon weapon)
     {
-        Instantiate(weaponData.weapon, holdWeapon);
+        if (playerWeapon == null)
+        {
+            playerWeapon = Instantiate(weapon, holdWeapon);
+        }
+        else
+        {
+            Destroy(playerWeapon.gameObject);
+            playerWeapon = Instantiate(weapon, holdWeapon);
+        }
     }
 
     public void RemoveTargetWhenHit(Character attacker)
@@ -85,7 +93,7 @@ public class Character : MonoBehaviour
         if (mainTarget != null)
         {
             direc = mainTarget.transform.position - transform.position;
-            Bullet spawnBullet = LeanPool.Spawn(weaponData.bullet, firePos.position, firePos.rotation);
+            Bullet spawnBullet = LeanPool.Spawn(WeaponData.bullet, firePos.position, firePos.rotation);
             spawnBullet.SeekAttacker(this);
             spawnBullet.SeekDirec(direc);
             spawnBullet.OnDespawn(timeDestroy);

@@ -49,9 +49,9 @@ public class Player : Character
     public override void OnInit()
     {
         base.OnInit();
-        if (weaponData == null)
+        if (WeaponData == null)
         {
-            weaponData = DataManager.Instance.GetWeaponData(currentWeaponType);
+            WeaponData = DataManager.Instance.GetWeaponData(currentWeaponType);
         }
     }
 

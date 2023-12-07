@@ -51,9 +51,9 @@ public class Enemy : Character
         List<WeaponData> weapons = DataManager.Instance.weaponDataSO.listWeaponData;
         int index = Random.Range(0, weapons.Count - 1);
         currentWeaponType = (WeaponType)index;
-        if (weaponData == null)
+        if (WeaponData == null)
         {
-            weaponData = DataManager.Instance.GetWeaponData(currentWeaponType);
+            WeaponData = DataManager.Instance.GetWeaponData(currentWeaponType);
         }
     }
 
