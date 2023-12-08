@@ -63,6 +63,7 @@ public class CanvasWeaponShop : MonoBehaviour
         player.currentWeaponType = weaponData.listWeaponData[index].weaponType;
         player.WeaponData = DataManager.Instance.GetWeaponData(player.currentWeaponType);
         player.SpawnWeapon(player.WeaponData.weapon);
+        DataManager.Instance.SeekPlayerData(player.currentWeaponType);
     }
 
     private void CloseWeaponShop()

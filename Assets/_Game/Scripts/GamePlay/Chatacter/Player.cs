@@ -3,6 +3,7 @@ using UnityEngine;
 public class Player : Character
 {
     [SerializeField] protected DynamicJoystick joystick;
+    
 
     public override void Update()
     {
@@ -16,7 +17,7 @@ public class Player : Character
         {
             Attack();
         }
-
+        
     }
 
     private void FixedUpdate()
@@ -43,7 +44,7 @@ public class Player : Character
 
             ChangeAnim(CacheString.ANIM_IDLE);
         }
-
+        
     }
 
     public override void OnInit()
@@ -52,6 +53,8 @@ public class Player : Character
         
         if (WeaponData == null)
         {
+            //Take Data from Player Data
+            currentWeaponType = DataManager.Instance.LoadPlayerData().weaponTypeData;
             WeaponData = DataManager.Instance.GetWeaponData(currentWeaponType);
         }
     }

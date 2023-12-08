@@ -18,5 +18,7 @@ public class CacheString : MonoBehaviour
     //Layer Strig
     public const string CHARACTER_LAYER = "Character";
 
+    //Data Key
+    public const string PLAYER_DATA_KEY = "PlayerData";
 
 }

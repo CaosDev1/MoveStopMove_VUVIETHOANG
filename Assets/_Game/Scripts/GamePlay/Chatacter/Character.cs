@@ -98,9 +98,7 @@ public class Character : MonoBehaviour
             spawnBullet.SeekDirec(direc);
             spawnBullet.OnDespawn(timeDestroy);
             holdWeapon.gameObject.SetActive(false);
-
         }
-
     }
 
     public void ResetAttack()

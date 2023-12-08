@@ -6,7 +6,12 @@ public class DataManager : Singleton<DataManager>
 {
     public WeaponDataSO weaponDataSO;
     public NameDataSO nameDataSO;
+    private PlayerData playerData;
 
+    public void Init()
+    {
+        playerData = LoadPlayerData();
+    }
     public WeaponData GetWeaponData(WeaponType weaponType)
     {
         List<WeaponData> weapons = weaponDataSO.listWeaponData;
@@ -28,8 +33,26 @@ public class DataManager : Singleton<DataManager>
         {
             
         }
-
-        
         return null;
+    }
+
+    public void SeekPlayerData(WeaponType weaponType)
+    {
+        playerData.weaponTypeData = weaponType;
+        SavePlayerData(playerData);
+    }
+
+    public void SavePlayerData(PlayerData playerData)
+    {
+        string dataString = JsonUtility.ToJson(playerData);
+        PlayerPrefs.SetString(CacheString.PLAYER_DATA_KEY,dataString);
+        
+    }
+
+    public PlayerData LoadPlayerData()
+    {
+        string dataString = PlayerPrefs.GetString(CacheString.PLAYER_DATA_KEY);
+        PlayerData playerData = JsonUtility.FromJson<PlayerData>(dataString);
+        return playerData;
     }
 }
