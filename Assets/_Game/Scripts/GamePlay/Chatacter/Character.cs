@@ -115,6 +115,8 @@ public class Character : MonoBehaviour
         isDead = false;
         isIdle = true;
         isAttack = false;
+        listTarget.Clear();
+        mainTarget = null;
         //ChangeAnim(CacheString.ANIM_IDLE);
     }
 

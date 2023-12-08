@@ -49,6 +49,7 @@ public class Player : Character
     public override void OnInit()
     {
         base.OnInit();
+        
         if (WeaponData == null)
         {
             WeaponData = DataManager.Instance.GetWeaponData(currentWeaponType);
@@ -59,7 +60,7 @@ public class Player : Character
     {
         base.OnDeath();
         //TO DO: Pop up UI when player die
-        //UIManager.Instance.DoFinish();
+        UIManager.Instance.OpenFinishUI();
         GameManager.Instance.ChangeStage(GameState.Finish);
 
     }
