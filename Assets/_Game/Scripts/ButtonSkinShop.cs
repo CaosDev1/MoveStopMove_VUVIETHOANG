@@ -1,22 +1,29 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class ButtonSkinShop : MonoBehaviour
 {
-    
-    [SerializeField] private Button skinSelectButton;
-    [SerializeField] private CanvasSkinShop canvasSkinShop;
 
-    private void Start()
+    [SerializeField] private Button skinSelectButton;
+    [SerializeField] private Image imageButton;
+
+    //[SerializeField] private CanvasSkinShop canvasSkinShop;
+    private ItemData itemData;
+    
+
+    private void OnEnable()
     {
-        skinSelectButton.onClick.AddListener(ChangeCurrentButton);
+
     }
 
-    private void ChangeCurrentButton()
+    public void SetData(ItemData itemData, Action<ItemData> callBack)
     {
-         
-        
+        this.itemData = itemData;
+        imageButton.sprite = itemData.itemSprite;
+        // click
+        skinSelectButton.onClick.AddListener(() => {
+            callBack?.Invoke(itemData);
+        });
     }
 }

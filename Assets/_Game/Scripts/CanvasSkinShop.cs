@@ -1,12 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class CanvasSkinShop : MonoBehaviour
 {
-    [SerializeField] private GameObject spawnShopCanvasPos;
-    [SerializeField] private GameObject currtentCanvaShop;
+    [SerializeField] private Transform spawnShopCanvasPos;
+    private GameObject currtentCanvaShop;
     [Space]
 
     [SerializeField] private Button hatShopButton;
@@ -40,6 +38,7 @@ public class CanvasSkinShop : MonoBehaviour
         buyButton.onClick.AddListener(DoBuyButton);
         unlockOneTimeButton.onClick.AddListener(DoUnlockOneTimeButton);
         OpenHatShop();
+        
     }
     private void OpenHatShop()
     {
@@ -73,14 +72,14 @@ public class CanvasSkinShop : MonoBehaviour
 
     private void ChangeCanvaShop(GameObject shopPrefabs)
     {
-        if(currtentCanvaShop == null)
+        if (currtentCanvaShop == null)
         {
-            currtentCanvaShop = Instantiate(shopPrefabs,spawnShopCanvasPos.transform);
+            currtentCanvaShop = Instantiate(shopPrefabs, spawnShopCanvasPos);
         }
-        else
+        else if(currtentCanvaShop != shopPrefabs)
         {
             Destroy(currtentCanvaShop);
-            currtentCanvaShop = Instantiate(shopPrefabs, spawnShopCanvasPos.transform);
+            currtentCanvaShop = Instantiate(shopPrefabs, spawnShopCanvasPos);
         }
     }
 
