@@ -1,4 +1,4 @@
-using System.Collections;
+
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,7 +10,19 @@ public class DataManager : Singleton<DataManager>
 
     public void Init()
     {
+        //playerData.weaponTypeData = WeaponType.Hammer;
+        if(!PlayerPrefs.HasKey(CacheString.PLAYER_DATA_KEY))
+        {
+            CreatePlayerData();
+        }
         playerData = LoadPlayerData();
+        
+    }
+
+    public void CreatePlayerData()
+    {
+        playerData = new PlayerData();
+        SavePlayerData(playerData);
     }
     public WeaponData GetWeaponData(WeaponType weaponType)
     {
@@ -36,7 +48,7 @@ public class DataManager : Singleton<DataManager>
         return null;
     }
 
-    public void SeekPlayerData(WeaponType weaponType)
+    public void ChangeWeapon(WeaponType weaponType)
     {
         playerData.weaponTypeData = weaponType;
         SavePlayerData(playerData);
@@ -54,5 +66,6 @@ public class DataManager : Singleton<DataManager>
         string dataString = PlayerPrefs.GetString(CacheString.PLAYER_DATA_KEY);
         PlayerData playerData = JsonUtility.FromJson<PlayerData>(dataString);
         return playerData;
+        
     }
 }
