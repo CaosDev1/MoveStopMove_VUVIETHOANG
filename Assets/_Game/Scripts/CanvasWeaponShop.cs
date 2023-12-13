@@ -60,10 +60,10 @@ public class CanvasWeaponShop : MonoBehaviour
 
     private void SelectWeapon()
     {
-        player.currentWeaponType = weaponData.listWeaponData[index].weaponType;
-        player.WeaponData = DataManager.Instance.GetWeaponData(player.currentWeaponType);
+        player.CurrentWeaponType = weaponData.listWeaponData[index].weaponType;
+        player.WeaponData = DataManager.Instance.GetWeaponData(player.CurrentWeaponType);
         player.SpawnWeapon(player.WeaponData.weapon);
-        DataManager.Instance.ChangeWeapon(player.currentWeaponType);
+        DataManager.Instance.ChangeWeapon(player.CurrentWeaponType);
     }
 
     private void CloseWeaponShop()

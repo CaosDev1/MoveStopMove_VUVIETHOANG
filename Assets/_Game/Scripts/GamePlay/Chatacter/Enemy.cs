@@ -50,10 +50,10 @@ public class Enemy : Character
     {
         List<WeaponData> weapons = DataManager.Instance.weaponDataSO.listWeaponData;
         int index = Random.Range(0, weapons.Count - 1);
-        currentWeaponType = (WeaponType)index;
+        CurrentWeaponType = (WeaponType)index;
         if (WeaponData == null)
         {
-            WeaponData = DataManager.Instance.GetWeaponData(currentWeaponType);
+            WeaponData = DataManager.Instance.GetWeaponData(CurrentWeaponType);
         }
     }
 

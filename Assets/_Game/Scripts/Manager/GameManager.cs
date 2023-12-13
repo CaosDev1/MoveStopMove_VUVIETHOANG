@@ -12,7 +12,7 @@ public enum GameState
 public class GameManager : Singleton<GameManager>
 {
     private GameState state;
-    private void Awake()
+    private void Start()
     {
         DataManager.Instance.Init();
     }

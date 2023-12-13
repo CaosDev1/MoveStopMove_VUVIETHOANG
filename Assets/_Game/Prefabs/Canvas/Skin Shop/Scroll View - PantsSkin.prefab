@@ -529,6 +529,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9df376a4f98ab8a4894bc339f30ff876, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buttonSkinShop: {fileID: 6145894093076209287, guid: 89fa2922a06a3ef4db186eca8a4c88ae, type: 3}
+  buttonSkinShopPrb: {fileID: 6145894093076209287, guid: 89fa2922a06a3ef4db186eca8a4c88ae, type: 3}
   spawnButtonPos: {fileID: 9142845738000120647}
   pantDataSO: {fileID: 11400000, guid: e68ba825a3fcc31479454287a663ef7e, type: 2}

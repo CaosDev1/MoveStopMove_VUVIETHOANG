@@ -23,5 +23,6 @@ public class HatSkinShop : MonoBehaviour
     {
 
         Debug.Log(itemData.skinItemType.ToString());
+        Debug.Log(itemData.itemMaterial.ToString());
     }
 }

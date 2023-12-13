@@ -54,8 +54,8 @@ public class Player : Character
         if (WeaponData == null)
         {
             //Take Data from Player Data
-            //currentWeaponType = DataManager.Instance.LoadPlayerData().weaponTypeData;
-            WeaponData = DataManager.Instance.GetWeaponData(currentWeaponType);
+            CurrentWeaponType = DataManager.Instance.LoadPlayerData().weaponTypeData;
+            WeaponData = DataManager.Instance.GetWeaponData(CurrentWeaponType);
         }
         
         

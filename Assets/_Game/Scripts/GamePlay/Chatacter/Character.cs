@@ -20,7 +20,7 @@ public class Character : MonoBehaviour
     protected Vector3 direc;
 
     [Header("Weapon Info")]
-    [SerializeField] public WeaponType currentWeaponType;
+    private WeaponType currentWeaponType;
     [SerializeField] protected Transform holdWeapon;
     [SerializeField] protected Transform firePos;
     [SerializeField] protected float timeDestroy;
@@ -33,6 +33,7 @@ public class Character : MonoBehaviour
     public Animator Anim { get => anim; set => anim = value; }
     public Character MainTarget { get => mainTarget; set => mainTarget = value; }
     public WeaponData WeaponData { get => weaponData; set => weaponData = value; }
+    public WeaponType CurrentWeaponType { get => currentWeaponType; set => currentWeaponType = value; }
 
     private void Awake()
     {

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PantSkinShop : MonoBehaviour
 {
-    [SerializeField] private ButtonSkinShop buttonSkinShop;
+    [SerializeField] private ButtonSkinShop buttonSkinShopPrb;
     [SerializeField] private Transform spawnButtonPos;
     [SerializeField] private PantDataSO pantDataSO;
 
@@ -14,7 +14,15 @@ public class PantSkinShop : MonoBehaviour
         for (int i = 0; i < pants.Count; i++)
         {
             //buttonSkinShop.ChangeImageItem(pants[i].itemSprite, pants[i].skinItemType);
-            Instantiate(buttonSkinShop, spawnButtonPos);
+            ButtonSkinShop skinItem = Instantiate(buttonSkinShopPrb, spawnButtonPos);
+            skinItem.SetData(pants[i], OnItemDataHandle);
         }
+    }
+
+    private void OnItemDataHandle(ItemData itemData)
+    {
+
+        Debug.Log(itemData.skinItemType.ToString());
+        Debug.Log(itemData.itemMaterial.ToString());
     }
 }

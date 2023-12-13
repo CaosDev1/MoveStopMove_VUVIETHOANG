@@ -16,14 +16,14 @@ public class DataManager : Singleton<DataManager>
             CreatePlayerData();
         }
         playerData = LoadPlayerData();
-        
     }
 
     public void CreatePlayerData()
     {
         playerData = new PlayerData();
-        SavePlayerData(playerData);
+        SavePlayerData(this.playerData);
     }
+
     public WeaponData GetWeaponData(WeaponType weaponType)
     {
         List<WeaponData> weapons = weaponDataSO.listWeaponData;
@@ -33,17 +33,6 @@ public class DataManager : Singleton<DataManager>
             {
                 return weapons[i];
             }
-        }
-        
-        return null;
-    }
-
-    public NameData GetNameData(string characterName)
-    {
-        List<NameData> nameDatas = nameDataSO.listName;
-        for (int i = 0; i < nameDatas.Count; i++)
-        {
-            
         }
         return null;
     }
@@ -66,6 +55,15 @@ public class DataManager : Singleton<DataManager>
         string dataString = PlayerPrefs.GetString(CacheString.PLAYER_DATA_KEY);
         PlayerData playerData = JsonUtility.FromJson<PlayerData>(dataString);
         return playerData;
-        
     }
+
+    //public NameData GetNameData(string characterName)
+    //{
+    //    List<NameData> nameDatas = nameDataSO.listName;
+    //    for (int i = 0; i < nameDatas.Count; i++)
+    //    {
+
+    //    }
+    //    return null;
+    //}
 }
