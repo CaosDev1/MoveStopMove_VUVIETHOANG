@@ -5,7 +5,6 @@ public class Character : MonoBehaviour
 {
     [Header("Move Info")]
     [SerializeField] protected Rigidbody rb;
-
     [SerializeField] private Animator anim;
     [SerializeField] protected float moveSpeed;
     protected string currentAnimName = CacheString.ANIM_IDLE;
@@ -13,10 +12,10 @@ public class Character : MonoBehaviour
     public bool isAttack = false;
     public bool isDead = false;
     private Transform myTransform;
+    
     [Header("Collier Info")]
     protected Character mainTarget;
     protected List<Character> listTarget = new List<Character>();
-
     protected Vector3 direc;
 
     [Header("Weapon Info")]
@@ -26,19 +25,28 @@ public class Character : MonoBehaviour
     [SerializeField] protected float timeDestroy;
     [SerializeField] protected float delayShootTime;
     private Weapon playerWeapon;
-
     private WeaponData weaponData;
     protected Bullet bulletOjb;
+
+    [Header("Hat Info")]
+    [SerializeField] private Transform headBone;
+    private SkinItemType playerHatType;
+    private Hat playerHat;
+    private ItemData hatData;
+    
 
     public Animator Anim { get => anim; set => anim = value; }
     public Character MainTarget { get => mainTarget; set => mainTarget = value; }
     public WeaponData WeaponData { get => weaponData; set => weaponData = value; }
     public WeaponType CurrentWeaponType { get => currentWeaponType; set => currentWeaponType = value; }
+    public SkinItemType PlayerHatType { get => playerHatType; set => playerHatType = value; }
+    public ItemData HatData { get => hatData; set => hatData = value; }
 
-    private void Awake()
+    private void Start()
     {
         OnInit();
         SpawnWeapon(weaponData.weapon);
+        SpawnHatSkin(hatData.itemPrefab);
         GameManager.Instance.ChangeStage(GameState.MainMenu);
     }
 
@@ -50,6 +58,19 @@ public class Character : MonoBehaviour
             {
                 FindClosestTarget(transform.position, listTarget);
             }
+        }
+    }
+
+    public void SpawnHatSkin(Hat hat)
+    {
+        if(playerHat == null)
+        {
+            playerHat = Instantiate(hat, headBone);
+        }
+        else
+        {
+            Destroy(playerHat.gameObject);
+            playerHat = Instantiate(hat, headBone);
         }
     }
     public void SpawnWeapon(Weapon weapon)

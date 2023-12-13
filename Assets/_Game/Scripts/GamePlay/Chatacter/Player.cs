@@ -57,7 +57,13 @@ public class Player : Character
             CurrentWeaponType = DataManager.Instance.LoadPlayerData().weaponTypeData;
             WeaponData = DataManager.Instance.GetWeaponData(CurrentWeaponType);
         }
-        
+
+        if(HatData == null)
+        {
+            PlayerHatType = DataManager.Instance.LoadPlayerData().hatTypeData;
+            HatData = DataManager.Instance.GetHatData(PlayerHatType);
+            
+        }
         
     }
 

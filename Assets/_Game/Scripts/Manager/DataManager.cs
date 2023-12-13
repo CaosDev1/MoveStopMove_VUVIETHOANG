@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class DataManager : Singleton<DataManager>
 {
+    
     public WeaponDataSO weaponDataSO;
+    public HatDataSO hatDataSO;
     public NameDataSO nameDataSO;
     private PlayerData playerData;
 
@@ -37,9 +39,28 @@ public class DataManager : Singleton<DataManager>
         return null;
     }
 
+    public HatData GetHatData(SkinItemType hatItemData)
+    {
+        List<HatData> hatDatas = hatDataSO.hatDataList;
+        for (int i = 0; i < hatDataSO.hatDataList.Count; i++)
+        {
+            if(hatItemData == hatDatas[i].skinItemType)
+            {
+                return hatDatas[i];
+            }
+        }
+        return null;
+    }
+
     public void ChangeWeapon(WeaponType weaponType)
     {
         playerData.weaponTypeData = weaponType;
+        SavePlayerData(playerData);
+    }
+
+    public void ChangeHatSkin(SkinItemType hatSkinItemType)
+    {
+        playerData.hatTypeData = hatSkinItemType;
         SavePlayerData(playerData);
     }
 

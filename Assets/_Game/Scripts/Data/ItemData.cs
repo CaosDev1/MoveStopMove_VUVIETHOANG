@@ -29,5 +29,5 @@ public class ItemData
     public SkinItemType skinItemType;
     public Sprite itemSprite;
     public Material itemMaterial;
-    public GameObject itemPrefab;
+    public Hat itemPrefab;
 }

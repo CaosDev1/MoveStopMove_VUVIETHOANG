@@ -6,6 +6,7 @@ public class UIManager : Singleton<UIManager>
     [SerializeField] private GameObject canvaJoystick;
     [SerializeField] private GameObject finishUI;
     [SerializeField] private GameObject weaponShopUI;
+    [SerializeField] private GameObject skinShopUI;
     private void Start()
     {
         OpenMainMenu();
@@ -37,10 +38,22 @@ public class UIManager : Singleton<UIManager>
         weaponShopUI.SetActive(false);
         mainMenuUI.SetActive(true);
     }
-    
+
     public void OpenFinishUI()
     {
         finishUI.SetActive(true);
+    }
+
+    public void OpenSkinShopUI()
+    {
+        mainMenuUI.SetActive(false);
+        skinShopUI.SetActive(true);
+    }
+
+    public void CloseSkinShopUI()
+    {
+        skinShopUI.SetActive(false);
+        mainMenuUI.SetActive(true);
     }
 
     public void CloseFinishUI()

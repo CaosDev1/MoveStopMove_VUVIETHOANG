@@ -17,6 +17,7 @@ public class CanvasMainMenu : MonoBehaviour
     {
         playButton.onClick.AddListener(PlayeButtonOnClick);
         weaponShopButton.onClick.AddListener(WeaponShopButtonOnClick);
+        skinShopButton.onClick.AddListener(SkinShopButtonOnClick);
     }
 
     private void PlayeButtonOnClick()
@@ -27,5 +28,10 @@ public class CanvasMainMenu : MonoBehaviour
     private void WeaponShopButtonOnClick()
     {
         UIManager.Instance.OpenWeaponShop();
+    }
+
+    private void SkinShopButtonOnClick()
+    {
+        UIManager.Instance.OpenSkinShopUI();
     }
 }

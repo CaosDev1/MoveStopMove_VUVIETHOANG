@@ -9,6 +9,7 @@ public class CanvasSkinShop : MonoBehaviour
 
     [SerializeField] private Button hatShopButton;
     [SerializeField] private GameObject hatShopPrefab;
+    private HatSkinShop hatSkinShop;
     [Space]
 
     [SerializeField] private Button pantsShopButton;
@@ -25,9 +26,10 @@ public class CanvasSkinShop : MonoBehaviour
 
     [SerializeField] private Button buyButton;
     [SerializeField] private Button unlockOneTimeButton;
+    [Space]
 
-    private Button currentButton;
-
+    [SerializeField] private Button closeButton;     
+    
 
     private void Start()
     {
@@ -37,32 +39,36 @@ public class CanvasSkinShop : MonoBehaviour
         fullSetShopButton.onClick.AddListener(OpenFullSetShop);
         buyButton.onClick.AddListener(DoBuyButton);
         unlockOneTimeButton.onClick.AddListener(DoUnlockOneTimeButton);
+
+        closeButton.onClick.AddListener(CloseSkinShop);
         OpenHatShop();
         
     }
     private void OpenHatShop()
     {
-        ChangeCanvaShop(hatShopPrefab);
+        SwitchCanvaShop(hatShopPrefab);
+        hatSkinShop = hatShopPrefab.GetComponent<HatSkinShop>();
     }
 
     private void OpenPantShop()
     {
-        ChangeCanvaShop(pantsShopPrefab);
+        SwitchCanvaShop(pantsShopPrefab);
     }
 
     private void OpenSheildShop()
     {
-        ChangeCanvaShop(sheildShopPrefab);
+        SwitchCanvaShop(sheildShopPrefab);
     }
 
     private void OpenFullSetShop()
     {
-        ChangeCanvaShop(fullSetShopPrefab);
+        SwitchCanvaShop(fullSetShopPrefab);
     }
 
     private void DoBuyButton()
     {
         //TO DO: Buy weapon if u have enough gold
+        hatSkinShop.BuyHatSkin();
     }
 
     private void DoUnlockOneTimeButton()
@@ -70,6 +76,25 @@ public class CanvasSkinShop : MonoBehaviour
         //TO DO: Pop up Ad and unlock one time item
     }
 
+    private void CloseSkinShop()
+    {
+        UIManager.Instance.CloseSkinShopUI();
+    }
+
+    private void SwitchCanvaShop(GameObject canvaShop)
+    {
+        if(currtentCanvaShop == null)
+        {
+            currtentCanvaShop = canvaShop;
+            currtentCanvaShop.SetActive(true);
+        }
+        else
+        {
+            currtentCanvaShop.SetActive(false);
+            currtentCanvaShop = canvaShop;
+            currtentCanvaShop.SetActive(true);
+        }
+    }
     private void ChangeCanvaShop(GameObject shopPrefabs)
     {
         if (currtentCanvaShop == null)

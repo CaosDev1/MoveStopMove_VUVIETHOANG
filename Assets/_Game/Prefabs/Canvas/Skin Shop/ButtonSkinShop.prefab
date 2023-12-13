@@ -519,8 +519,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skinSelectButton: {fileID: 3408351955800605284}
   imageButton: {fileID: 3578715823451417936}
-  hatDataSO: {fileID: 11400000, guid: e8954a6b2f1179241a44cdafc8f9dc77, type: 2}
-  pantDataSO: {fileID: 11400000, guid: e68ba825a3fcc31479454287a663ef7e, type: 2}
+  selectImage: {fileID: 1597761126032599264}
 --- !u!1 &4806693356940150040
 GameObject:
   m_ObjectHideFlags: 0

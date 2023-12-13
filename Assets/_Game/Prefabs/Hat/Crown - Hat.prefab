@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4150696935940699438}
+  - component: {fileID: 3711862751840909657}
   m_Layer: 0
   m_Name: Crown - Hat
   m_TagString: Untagged
@@ -32,6 +33,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3711862751840909657
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3059255775384210262}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef58a50e3db20b34baacd0847d673272, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &9052661382330987718
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -39,6 +52,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4150696935940699438}
     m_Modifications:
+    - target: {fileID: -7383477326603975819, guid: 98b5be968415fe14b9697b19d0009414, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: d15897a066fc1bd4e873db20d70da822, type: 2}
     - target: {fileID: -4216859302048453862, guid: 98b5be968415fe14b9697b19d0009414, type: 3}
       propertyPath: m_RootOrder
       value: 0
