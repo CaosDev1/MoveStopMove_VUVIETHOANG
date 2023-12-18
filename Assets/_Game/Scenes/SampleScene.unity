@@ -1332,6 +1332,7 @@ MonoBehaviour:
   timeDestroy: 1
   delayShootTime: 0.4
   headBone: {fileID: 2136195893759174951}
+  playerPantMaterial: {fileID: 5512191309512243011}
   joystick: {fileID: 11667566}
 --- !u!54 &186188691
 Rigidbody:
@@ -1540,6 +1541,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnShopCanvasPos: {fileID: 1026064543}
+  currentShopType: 0
   hatShopButton: {fileID: 2103703786}
   hatShopPrefab: {fileID: 7474506086753656570}
   pantsShopButton: {fileID: 2676226}
@@ -2403,6 +2405,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponDataSO: {fileID: 11400000, guid: 754f52ece6ea03147a997266ac7544e9, type: 2}
   hatDataSO: {fileID: 11400000, guid: e8954a6b2f1179241a44cdafc8f9dc77, type: 2}
+  pantDataSO: {fileID: 11400000, guid: e68ba825a3fcc31479454287a663ef7e, type: 2}
   nameDataSO: {fileID: 11400000, guid: d25f20566a6454ae3914217e3a757e60, type: 2}
 --- !u!1 &495039764
 GameObject:
@@ -5573,7 +5576,7 @@ MonoBehaviour:
   enemyPrefab: {fileID: 1017658774247514369, guid: b46553742c538c1409fe66c924c9e729, type: 3}
   minTimespawn: 2
   maxTimespawn: 2
-  maxEnemySpawn: 1
+  maxEnemySpawn: 10
   revivePos: {fileID: 814064098}
   player: {fileID: 186188690}
 --- !u!1 &931429243
@@ -14708,6 +14711,7 @@ MonoBehaviour:
   buttonSkinShopPrb: {fileID: 6145894093076209287, guid: 89fa2922a06a3ef4db186eca8a4c88ae, type: 3}
   spawnButtonPos: {fileID: 1353837669593144440}
   pantDataSO: {fileID: 11400000, guid: e68ba825a3fcc31479454287a663ef7e, type: 2}
+  player: {fileID: 186188690}
 --- !u!1 &6126185696657049205
 GameObject:
   m_ObjectHideFlags: 0
@@ -15446,7 +15450,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &7474506086753656571
 RectTransform:
   m_ObjectHideFlags: 0

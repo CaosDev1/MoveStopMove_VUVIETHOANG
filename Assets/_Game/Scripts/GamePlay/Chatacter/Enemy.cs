@@ -14,8 +14,9 @@ public class Enemy : Character
     //private string botName = null;
     public bool isEndPoint => Vector3.Distance(transform.position, newPos) < 1.1f;
 
-    private void Start()
+    public override void Start()
     {
+        base.Start();
         currentState = new PatrolState();
     }
     public override void Update()
@@ -34,6 +35,7 @@ public class Enemy : Character
         mainTarget = null;
         listTarget.Clear();
         SetWeaponEnemy();
+        SetHatSkinEnemy();
         ChangeState(new PatrolState());
     }
 
@@ -55,6 +57,22 @@ public class Enemy : Character
         {
             WeaponData = DataManager.Instance.GetWeaponData(CurrentWeaponType);
         }
+    }
+
+    private void SetHatSkinEnemy()
+    {
+        List<HatData> hatDatas = DataManager.Instance.hatDataSO.hatDataList;
+        int index = Random.Range(0,hatDatas.Count - 1);
+        PlayerHatType = (HatItemType)index;
+        if (PlayerHatData == null)
+        {
+            PlayerHatData = DataManager.Instance.GetHatData(PlayerHatType);
+        }
+    }
+
+    private void SetPantSkinEnemy()
+    {
+
     }
 
     public void TurnOnTargetIcon()

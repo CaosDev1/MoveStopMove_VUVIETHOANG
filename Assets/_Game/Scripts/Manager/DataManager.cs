@@ -7,6 +7,7 @@ public class DataManager : Singleton<DataManager>
     
     public WeaponDataSO weaponDataSO;
     public HatDataSO hatDataSO;
+    public PantDataSO pantDataSO;
     public NameDataSO nameDataSO;
     private PlayerData playerData;
 
@@ -39,14 +40,27 @@ public class DataManager : Singleton<DataManager>
         return null;
     }
 
-    public HatData GetHatData(SkinItemType hatItemData)
+    public HatData GetHatData(HatItemType hatItemData)
     {
         List<HatData> hatDatas = hatDataSO.hatDataList;
-        for (int i = 0; i < hatDataSO.hatDataList.Count; i++)
+        for (int i = 0; i < hatDatas.Count; i++)
         {
-            if(hatItemData == hatDatas[i].skinItemType)
+            if(hatItemData == hatDatas[i].hatItemType)
             {
                 return hatDatas[i];
+            }
+        }
+        return null;
+    }
+
+    public PantData GetPantData(PantItemType pantItemData)
+    {
+        List<PantData> pantDatas = pantDataSO.pantDataList;
+        for (int i = 0; i < pantDatas.Count; i++)
+        {
+            if(pantItemData == pantDatas[i].pantItemType)
+            {
+                return pantDatas[i];
             }
         }
         return null;
@@ -58,9 +72,15 @@ public class DataManager : Singleton<DataManager>
         SavePlayerData(playerData);
     }
 
-    public void ChangeHatSkin(SkinItemType hatSkinItemType)
+    public void ChangeHatSkin(HatItemType hatSkinItemType)
     {
         playerData.hatTypeData = hatSkinItemType;
+        SavePlayerData(playerData);
+    }
+
+    public void ChangePantSkin(PantItemType pantSkinItemType)
+    {
+        playerData.pantTypeData = pantSkinItemType;
         SavePlayerData(playerData);
     }
 

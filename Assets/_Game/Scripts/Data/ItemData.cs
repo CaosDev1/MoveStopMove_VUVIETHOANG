@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public enum SkinItemType
+public enum HatItemType
 {
     //Hat Type
     ARROW = 0,
@@ -12,21 +12,23 @@ public enum SkinItemType
     HORN = 6,
     POLICECAP = 7,
     STRAWHAT = 8,
-
-    //Pant Type
-    PANT_1 = 9,
-    PANT_2 = 10,
-    PANT_3 = 11,
-    PANT_4 = 12,
-    PANT_5 = 13,
-    PANT_6 = 14,
-    PANT_7 = 15,
-    PANT_8 = 16,
-    PANT_9 = 17,
+}
+public enum PantItemType
+{
+    PANT_1 = 0,
+    PANT_2 = 1,
+    PANT_3 = 2,
+    PANT_4 = 3,
+    PANT_5 = 4,
+    PANT_6 = 5,
+    PANT_7 = 6,
+    PANT_8 = 7,
+    PANT_9 = 8,
 }
 public class ItemData
 {
-    public SkinItemType skinItemType;
+    public HatItemType hatItemType;
+    public PantItemType pantItemType;
     public Sprite itemSprite;
     public Material itemMaterial;
     public Hat itemPrefab;

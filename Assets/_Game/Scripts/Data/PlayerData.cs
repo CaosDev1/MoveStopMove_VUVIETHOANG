@@ -4,11 +4,11 @@ using UnityEngine;
 public class PlayerData
 {
     public WeaponType weaponTypeData;
-    public SkinItemType hatTypeData;
-    public SkinItemType pantTypeData;
+    public HatItemType hatTypeData;
+    public PantItemType pantTypeData;
     public PlayerData()
     {
         weaponTypeData = WeaponType.Hammer;
-        
+        pantTypeData = PantItemType.PANT_1;
     }
 }

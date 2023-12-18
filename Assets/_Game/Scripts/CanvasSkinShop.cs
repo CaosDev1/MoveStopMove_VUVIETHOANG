@@ -1,10 +1,12 @@
-using UnityEngine;
+using System.Diagnostics;
 using UnityEngine.UI;
+using UnityEngine;
 
 public class CanvasSkinShop : MonoBehaviour
 {
     [SerializeField] private Transform spawnShopCanvasPos;
     private GameObject currtentCanvaShop;
+    [SerializeField] private SkinShopType currentShopType;
     [Space]
 
     [SerializeField] private Button hatShopButton;
@@ -14,6 +16,7 @@ public class CanvasSkinShop : MonoBehaviour
 
     [SerializeField] private Button pantsShopButton;
     [SerializeField] private GameObject pantsShopPrefab;
+    private PantSkinShop pantSkinShop;
     [Space]
 
     [SerializeField] private Button sheildShopButton;
@@ -48,27 +51,50 @@ public class CanvasSkinShop : MonoBehaviour
     {
         SwitchCanvaShop(hatShopPrefab);
         hatSkinShop = hatShopPrefab.GetComponent<HatSkinShop>();
+        
+        currentShopType = SkinShopType.HATSHOP;
     }
 
     private void OpenPantShop()
     {
         SwitchCanvaShop(pantsShopPrefab);
+        pantSkinShop = pantsShopPrefab.GetComponent<PantSkinShop>();
+        currentShopType = SkinShopType.PANTSHOP;
     }
 
     private void OpenSheildShop()
     {
         SwitchCanvaShop(sheildShopPrefab);
+        currentShopType = SkinShopType.SHEILDSHOP;
     }
 
     private void OpenFullSetShop()
     {
         SwitchCanvaShop(fullSetShopPrefab);
+        currentShopType = SkinShopType.FULLSETSHOP;
     }
 
     private void DoBuyButton()
     {
-        //TO DO: Buy weapon if u have enough gold
-        hatSkinShop.BuyHatSkin();
+        switch (currentShopType)
+        {
+            case SkinShopType.HATSHOP:
+                hatSkinShop.BuyHatSkin();
+                break;
+            case SkinShopType.PANTSHOP:
+                //TO DO: Buy Pant
+                pantSkinShop.BuyPantSkin();
+                break;
+            case SkinShopType.SHEILDSHOP:
+
+                break;
+            case SkinShopType.FULLSETSHOP:
+
+                break;
+            default:
+                break;
+        }
+        
     }
 
     private void DoUnlockOneTimeButton()
@@ -108,4 +134,11 @@ public class CanvasSkinShop : MonoBehaviour
         }
     }
 
+    public enum SkinShopType
+    {
+        HATSHOP = 0,
+        PANTSHOP = 1,
+        SHEILDSHOP = 2,
+        FULLSETSHOP = 3,
+    }
 }

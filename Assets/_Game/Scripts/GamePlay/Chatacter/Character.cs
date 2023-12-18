@@ -29,25 +29,34 @@ public class Character : MonoBehaviour
     protected Bullet bulletOjb;
 
     [Header("Hat Info")]
-    [SerializeField] private Transform headBone;
-    private SkinItemType playerHatType;
-    private Hat playerHat;
-    private ItemData hatData;
+    [SerializeField] protected Transform headBone;
+    protected HatItemType playerHatType;
+    protected Hat playerHat;
+    protected ItemData playerHatData;
+
+    [Header("Pant Info")]
+    [SerializeField] protected SkinnedMeshRenderer playerPantMaterial;
+    protected ItemData playerPantData;
+    protected PantItemType playerPantType;
     
 
     public Animator Anim { get => anim; set => anim = value; }
     public Character MainTarget { get => mainTarget; set => mainTarget = value; }
     public WeaponData WeaponData { get => weaponData; set => weaponData = value; }
     public WeaponType CurrentWeaponType { get => currentWeaponType; set => currentWeaponType = value; }
-    public SkinItemType PlayerHatType { get => playerHatType; set => playerHatType = value; }
-    public ItemData HatData { get => hatData; set => hatData = value; }
+    public HatItemType PlayerHatType { get => playerHatType; set => playerHatType = value; }
+    public ItemData PlayerHatData { get => playerHatData; set => playerHatData = value; }
+    public ItemData PlayerPantData { get => playerPantData; set => playerPantData = value; }
+    public PantItemType PlayerPantType { get => playerPantType; set => playerPantType = value; }
 
-    private void Start()
+    public virtual void Start()
     {
         OnInit();
         SpawnWeapon(weaponData.weapon);
-        SpawnHatSkin(hatData.itemPrefab);
+        SpawnHatSkin(playerHatData.itemPrefab);
+        //ChangePlayerPant(playerPantData.itemMaterial);
         GameManager.Instance.ChangeStage(GameState.MainMenu);
+        
     }
 
     public virtual void Update()
@@ -59,6 +68,11 @@ public class Character : MonoBehaviour
                 FindClosestTarget(transform.position, listTarget);
             }
         }
+    }
+
+    public void ChangePlayerPant(Material pantDataMaterial)
+    {
+        playerPantMaterial.material = pantDataMaterial;
     }
 
     public void SpawnHatSkin(Hat hat)

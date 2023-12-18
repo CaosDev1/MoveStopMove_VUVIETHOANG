@@ -58,13 +58,17 @@ public class Player : Character
             WeaponData = DataManager.Instance.GetWeaponData(CurrentWeaponType);
         }
 
-        if(HatData == null)
+        if(playerHatData == null)
         {
             PlayerHatType = DataManager.Instance.LoadPlayerData().hatTypeData;
-            HatData = DataManager.Instance.GetHatData(PlayerHatType);
-            
+            PlayerHatData = DataManager.Instance.GetHatData(PlayerHatType);
         }
-        
+
+        if (PlayerPantData == null)
+        {
+           PlayerPantType = DataManager.Instance.LoadPlayerData().pantTypeData;
+           PlayerPantData = DataManager.Instance.GetPantData(PlayerPantType);
+        }
     }
 
     public override void OnDeath()

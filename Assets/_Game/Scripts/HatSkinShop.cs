@@ -21,7 +21,7 @@ public class HatSkinShop : MonoBehaviour
 
     private void OnItemDataHandle(ItemData hatItemData,ButtonSkinShop buttonSkinShop)
     {
-        player.PlayerHatType = hatItemData.skinItemType;
+        player.PlayerHatType = hatItemData.hatItemType;
 
         ChangeImageChooseSkin(buttonSkinShop);
     }
@@ -44,8 +44,8 @@ public class HatSkinShop : MonoBehaviour
 
     public void BuyHatSkin()
     {
-        player.HatData = DataManager.Instance.GetHatData(player.PlayerHatType);
-        player.SpawnHatSkin(player.HatData.itemPrefab);
+        player.PlayerHatData = DataManager.Instance.GetHatData(player.PlayerHatType);
+        player.SpawnHatSkin(player.PlayerHatData.itemPrefab);
         DataManager.Instance.ChangeHatSkin(player.PlayerHatType);
     }
 }

@@ -13,19 +13,23 @@ MonoBehaviour:
   m_Name: New Hat Data SO
   m_EditorClassIdentifier: 
   hatDataList:
-  - skinItemType: 0
+  - hatItemType: 0
+    pantItemType: 8
     itemSprite: {fileID: 21300000, guid: eb69cff6254433d4e9c38084ef04f590, type: 3}
     itemMaterial: {fileID: 0}
     itemPrefab: {fileID: 3141191816884342575, guid: c381b34c9e5c2e34495ef0357d14b868, type: 3}
-  - skinItemType: 4
+  - hatItemType: 1
+    pantItemType: 8
     itemSprite: {fileID: 21300000, guid: da18f161bc01907449ffa4e6f5b50614, type: 3}
     itemMaterial: {fileID: 0}
     itemPrefab: {fileID: 5397600725895686996, guid: 269d87431f2dd5343a56a17e8ac73de1, type: 3}
-  - skinItemType: 2
+  - hatItemType: 2
+    pantItemType: 0
     itemSprite: {fileID: 21300000, guid: e18f18b183a01424f8c20f088905e355, type: 3}
     itemMaterial: {fileID: 0}
     itemPrefab: {fileID: 1802576060596095091, guid: 73cb69cc6b37d244796f9055a6850160, type: 3}
-  - skinItemType: 3
+  - hatItemType: 3
+    pantItemType: 8
     itemSprite: {fileID: 21300000, guid: 5c06bab390a79764d8d0539b57b1cf45, type: 3}
     itemMaterial: {fileID: 0}
     itemPrefab: {fileID: 3711862751840909657, guid: 7a34627f75312c1448bd4227135a6aed, type: 3}

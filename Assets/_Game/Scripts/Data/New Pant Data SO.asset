@@ -13,27 +13,33 @@ MonoBehaviour:
   m_Name: New Pant Data SO
   m_EditorClassIdentifier: 
   pantDataList:
-  - skinItemType: 9
+  - hatItemType: 0
+    pantItemType: 0
     itemSprite: {fileID: 21300000, guid: 1f7e9eb236c8768498ad5d8078d2533d, type: 3}
     itemMaterial: {fileID: 2100000, guid: 4c730ac7a2e4bca49adfa52b246be869, type: 2}
     itemPrefab: {fileID: 0}
-  - skinItemType: 10
+  - hatItemType: 0
+    pantItemType: 1
     itemSprite: {fileID: 21300000, guid: 3ddbc9e0f3f883a46b1ba9635f87c222, type: 3}
     itemMaterial: {fileID: 2100000, guid: 83b5f3b990b88b34f8cb1ef255bc54e4, type: 2}
     itemPrefab: {fileID: 0}
-  - skinItemType: 11
+  - hatItemType: 0
+    pantItemType: 2
     itemSprite: {fileID: 21300000, guid: 2652851e5f7772041add8ebe7d548f2b, type: 3}
     itemMaterial: {fileID: 2100000, guid: 8dc93dbda2be87a4fb8548aab542fadd, type: 2}
     itemPrefab: {fileID: 0}
-  - skinItemType: 12
+  - hatItemType: 0
+    pantItemType: 3
     itemSprite: {fileID: 21300000, guid: ae9d58ecee0e3f848b8fedb3f2c67648, type: 3}
     itemMaterial: {fileID: 2100000, guid: 612eceaffa07bdb43a98cb4419aef423, type: 2}
     itemPrefab: {fileID: 0}
-  - skinItemType: 13
+  - hatItemType: 0
+    pantItemType: 4
     itemSprite: {fileID: 21300000, guid: 5433d4b044040c44487399b59f52e2b4, type: 3}
     itemMaterial: {fileID: 2100000, guid: a8ab73a5c58dea2408e9425b6279780e, type: 2}
     itemPrefab: {fileID: 0}
-  - skinItemType: 14
+  - hatItemType: 0
+    pantItemType: 5
     itemSprite: {fileID: 21300000, guid: ea8161e4ed231be438fe9e968bc8752c, type: 3}
     itemMaterial: {fileID: 2100000, guid: 2b1f6667c3c498544ae93aef41918e82, type: 2}
     itemPrefab: {fileID: 0}

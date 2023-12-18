@@ -6,5 +6,5 @@ using UnityEngine;
 [Serializable]
 public class PantData : ItemData
 {
-    
+
 }
