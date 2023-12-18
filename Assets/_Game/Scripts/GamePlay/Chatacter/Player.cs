@@ -77,6 +77,7 @@ public class Player : Character
         //TO DO: Pop up UI when player die
         UIManager.Instance.OpenFinishUI();
         GameManager.Instance.ChangeStage(GameState.Finish);
+        
 
     }
 }

@@ -13,7 +13,7 @@ public class PatrolState : IState
     public void OnEnter(Enemy enemy)
     {
         //enemy.SetDirection();
-        enemy.isIdle = true;
+        enemy.isIdle = false;
         enemy.isAttack = false;
     }
     public void OnExecute(Enemy enemy)

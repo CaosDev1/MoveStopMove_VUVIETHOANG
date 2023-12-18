@@ -32,8 +32,8 @@ public class Enemy : Character
     public override void OnInit()
     {
         base.OnInit();
-        mainTarget = null;
-        listTarget.Clear();
+        
+        currentAnimName = CacheString.ANIM_IDLE;
         SetWeaponEnemy();
         SetHatSkinEnemy();
         ChangeState(new PatrolState());

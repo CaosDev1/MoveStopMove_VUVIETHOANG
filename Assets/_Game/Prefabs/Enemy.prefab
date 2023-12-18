@@ -1012,7 +1012,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 0}
+  - {fileID: 2100000, guid: 2b1f6667c3c498544ae93aef41918e82, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1502,7 +1502,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 0}
+  - {fileID: 10302, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1991,7 +1991,7 @@ MonoBehaviour:
   timeDestroy: 1
   delayShootTime: 0.4
   headBone: {fileID: 1017658774010653758}
-  playerPantMaterial: {fileID: 0}
+  playerPantMaterial: {fileID: 1017658773284695824}
   agent: {fileID: 4456147135357074933}
   wanderRadius: 10
   targetIcon: {fileID: 4486373319592149357}

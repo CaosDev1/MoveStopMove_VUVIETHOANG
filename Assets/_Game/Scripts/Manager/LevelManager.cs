@@ -12,7 +12,9 @@ public class LevelManager : Singleton<LevelManager>
     [SerializeField] private Transform revivePos;
     [SerializeField] private Player player;
     private List<Enemy> enemies = new List<Enemy>();
-
+    [SerializeField] private int maxTarget;
+    private int characterHitCount = 1;
+    private int enemySpawnCount = 1;
     private void Start()
     {
         StartSpawnEnemy(maxEnemySpawn);
@@ -27,16 +29,23 @@ public class LevelManager : Singleton<LevelManager>
             Enemy spawnEnemy = LeanPool.Spawn(enemyPrefab, RandomNavSphere(Vector3.zero, 50f, -1), Quaternion.identity);
             
             enemies.Add(spawnEnemy);
+            enemySpawnCount++;
         }
     }
 
     public void EnemyDeath(Enemy enemy)
     {
         enemies.Remove(enemy);
-        
-        if(enemies.Count < maxEnemySpawn)
+        characterHitCount++;
+        if(enemies.Count < maxEnemySpawn && enemySpawnCount < maxTarget)
         {
             StartCoroutine(AddEnemy(Random.Range(minTimespawn,maxTimespawn)));
+            enemySpawnCount++;
+        }
+
+        if(characterHitCount == maxTarget)
+        {
+            
         }
     }
 
@@ -48,15 +57,22 @@ public class LevelManager : Singleton<LevelManager>
         Enemy spawnEnemy = LeanPool.Spawn(enemyPrefab, RandomNavSphere(Vector3.zero,20f,-1), Quaternion.identity);
         spawnEnemy.OnInit();
         enemies.Add(spawnEnemy);
+        
+        
+
     }
 
     public void ResetGame()
     {
         player.OnInit();
+        
         player.transform.position = revivePos.position;
         enemies.Clear();
         LeanPool.DespawnAll();
+        enemySpawnCount = 1;
+        characterHitCount = 1;
         StartSpawnEnemy(maxEnemySpawn);
+
     }
 
     public Vector3 RandomNavSphere(Vector3 origin, float dist, int layermask)
