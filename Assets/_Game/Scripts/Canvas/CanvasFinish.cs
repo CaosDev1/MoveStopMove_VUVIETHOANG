@@ -7,6 +7,7 @@ public class CanvasFinish : MonoBehaviour
 {
     [SerializeField] private Button contiuneButton;
     [SerializeField] private Button rewardButton;
+    
 
     private void Start()
     {

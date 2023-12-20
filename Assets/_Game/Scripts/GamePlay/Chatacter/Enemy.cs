@@ -36,6 +36,7 @@ public class Enemy : Character
         currentAnimName = CacheString.ANIM_IDLE;
         SetWeaponEnemy();
         SetHatSkinEnemy();
+        SetPantSkinEnemy();
         ChangeState(new PatrolState());
     }
 
@@ -72,7 +73,13 @@ public class Enemy : Character
 
     private void SetPantSkinEnemy()
     {
-
+        List<PantData> pantDatas = DataManager.Instance.pantDataSO.pantDataList;
+        int index = Random.Range(0,pantDatas.Count - 1);
+        PlayerPantType= (PantItemType)index;
+        if(PlayerPantData == null)
+        {
+            PlayerPantData = DataManager.Instance.GetPantData(PlayerPantType);
+        }
     }
 
     public void TurnOnTargetIcon()

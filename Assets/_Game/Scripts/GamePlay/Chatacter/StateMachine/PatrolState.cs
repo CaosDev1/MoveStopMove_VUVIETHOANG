@@ -12,16 +12,16 @@ public class PatrolState : IState
 
     public void OnEnter(Enemy enemy)
     {
-        //enemy.SetDirection();
+        enemy.SetDirection();
         enemy.isIdle = false;
         enemy.isAttack = false;
     }
     public void OnExecute(Enemy enemy)
     {
-        timer += Time.deltaTime;
+
         if (GameManager.Instance.IsStage(GameState.GamePlay))
         {
-            
+            timer += Time.deltaTime;
             //Enemy random move
             if (timer >= wanderTimer && !enemy.isAttack)
             {
@@ -30,6 +30,11 @@ public class PatrolState : IState
                 wanderTimer = Random.Range(3f, 5f);
             }
 
+            if (enemy.isIdle && enemy.MainTarget != null && !enemy.isAttack)
+            {
+                enemy.ChangeState(new AttackState());
+            }
+        }
             if (!enemy.isEndPoint)
             {
                 enemy.isIdle = false;
@@ -41,12 +46,6 @@ public class PatrolState : IState
                 enemy.isIdle = true;
                 enemy.ChangeAnim(CacheString.ANIM_IDLE);
             }
-
-            if (enemy.isIdle && enemy.MainTarget != null && !enemy.isAttack)
-            {
-                enemy.ChangeState(new AttackState());
-            }
-        }
     }
 
     public void OnExit(Enemy enemy)

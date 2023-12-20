@@ -3,7 +3,7 @@ using UnityEngine;
 public class Player : Character
 {
     [SerializeField] protected DynamicJoystick joystick;
-    
+    private bool isWin = false;
 
     public override void Update()
     {
@@ -13,16 +13,17 @@ public class Player : Character
             return;
         }
 
-        if (isIdle && !isAttack && mainTarget != null)
+        if (isIdle && !isAttack && mainTarget != null && !mainTarget.isDead)
         {
             Attack();
         }
-        
+
     }
 
     private void FixedUpdate()
     {
         if (isDead) return;
+        if (isWin) return;
 
         rb.velocity = new Vector3(joystick.Horizontal * moveSpeed, rb.velocity.y, joystick.Vertical * moveSpeed);
 
@@ -30,12 +31,13 @@ public class Player : Character
         {
             transform.rotation = Quaternion.LookRotation(rb.velocity);
             isIdle = false;
+            ChangeAnim(CacheString.ANIM_RUN);
+            
             if (isAttack)
             {
                 ResetAttack();
                 CancelInvoke(nameof(Shoot));
             }
-            ChangeAnim(CacheString.ANIM_RUN);
 
         }
         else if (!isAttack)
@@ -44,13 +46,13 @@ public class Player : Character
 
             ChangeAnim(CacheString.ANIM_IDLE);
         }
-        
     }
 
     public override void OnInit()
     {
         base.OnInit();
-        
+        isWin = false;
+
         if (WeaponData == null)
         {
             //Take Data from Player Data
@@ -58,7 +60,7 @@ public class Player : Character
             WeaponData = DataManager.Instance.GetWeaponData(CurrentWeaponType);
         }
 
-        if(playerHatData == null)
+        if (playerHatData == null)
         {
             PlayerHatType = DataManager.Instance.LoadPlayerData().hatTypeData;
             PlayerHatData = DataManager.Instance.GetHatData(PlayerHatType);
@@ -66,8 +68,8 @@ public class Player : Character
 
         if (PlayerPantData == null)
         {
-           PlayerPantType = DataManager.Instance.LoadPlayerData().pantTypeData;
-           PlayerPantData = DataManager.Instance.GetPantData(PlayerPantType);
+            PlayerPantType = DataManager.Instance.LoadPlayerData().pantTypeData;
+            PlayerPantData = DataManager.Instance.GetPantData(PlayerPantType);
         }
     }
 
@@ -77,7 +79,13 @@ public class Player : Character
         //TO DO: Pop up UI when player die
         UIManager.Instance.OpenFinishUI();
         GameManager.Instance.ChangeStage(GameState.Finish);
-        
+    }
 
+    public void OnWin()
+    {
+        isWin= true;
+        
+        UIManager.Instance.OpenWinUI();
+        ChangeAnim(CacheString.ANIM_WIN);
     }
 }

@@ -9,6 +9,7 @@ public class CacheString : MonoBehaviour
     public const string ANIM_RUN = "run";
     public const string ANIM_ATTACK = "attack";
     public const string ANIM_DEAD = "dead";
+    public const string ANIM_WIN = "win";
 
     //Tag String
     public const string BULLET_TAG = "Bullet";

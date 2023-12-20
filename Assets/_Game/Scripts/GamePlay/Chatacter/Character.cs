@@ -54,7 +54,7 @@ public class Character : MonoBehaviour
         OnInit();
         SpawnWeapon(weaponData.weapon);
         SpawnHatSkin(playerHatData.itemPrefab);
-        //ChangePlayerPant(playerPantData.itemMaterial);
+        ChangePlayerPant(playerPantData.itemMaterial);
         GameManager.Instance.ChangeStage(GameState.MainMenu);
         
     }
