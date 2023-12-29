@@ -130,3 +130,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 10
   rb: {fileID: 518543116793425090}
+  bulletSkin: {fileID: 6729150848824439498}
+  rotateSpeed: -4
+  canRotate: 1

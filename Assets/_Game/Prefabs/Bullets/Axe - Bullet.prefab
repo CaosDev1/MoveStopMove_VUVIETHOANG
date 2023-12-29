@@ -78,6 +78,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 10
   rb: {fileID: 3475557037670562390}
+  bulletSkin: {fileID: 1474390289555972226}
+  rotateSpeed: -4
+  canRotate: 1
 --- !u!1 &6959170167698227947
 GameObject:
   m_ObjectHideFlags: 0

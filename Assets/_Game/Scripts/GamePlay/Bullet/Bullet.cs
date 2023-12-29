@@ -6,13 +6,24 @@ public class Bullet : MonoBehaviour
 {
     [SerializeField] private float speed;
     [SerializeField] private Rigidbody rb;
-    
+    [SerializeField] private Transform bulletSkin;
+    [SerializeField] private float rotateSpeed;
+    [SerializeField] private bool canRotate;
     private Character attacker;
     private Vector3 direction;
     
     public virtual void Update()
     {
         rb.velocity = direction.normalized * speed;
+        RotateWeapon();
+    }
+
+    public void RotateWeapon()
+    {
+        if (canRotate)
+        {
+            bulletSkin.Rotate(Vector3.forward * rotateSpeed, Space.Self);
+        }
     }
 
     public void SeekDirec(Vector3 direction)
